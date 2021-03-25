@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -15,41 +15,43 @@ const email = "1234@gmail.com";
 function App() {
   const [measurements, setMeasurements] = useState("");
 
-  const loginUser = async () => {
-    await axios
-      .post(
-        `http://localhost:3001/signup?name=${name}&password=${password}&password_confirmation=${password_confirmation}&email=${email}`
-      )
-      .then(function (response) {
-        console.log("LOGGED IN", response);
-      })
-      .catch(function (error) {
-        console.log("ERROR", error);
-      });
-  };
   console.log(measurements);
-  useEffect(async () => {
-    return await axios
-      .get("http://localhost:3001/measurements", {
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      })
-      .then(function (response) {
-        setMeasurements(response.data[0]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  useEffect(() => {
+    const loginUser = async () => {
+      await axios
+        .post(
+          `http://localhost:3001/signup?name=${name}&password=${password}&password_confirmation=${password_confirmation}&email=${email}`
+        )
+        .then(function (response) {
+          console.log("LOGGED IN", response);
+        })
+        .catch(function (error) {
+          console.log("ERROR", error);
+        });
+      await axios
+        .get("http://localhost:3001/measurements", {
+          headers: {
+            Authorization: `Basic ${token}`,
+          },
+        })
+        .then(function (response) {
+          setMeasurements(response.data[0]);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+    loginUser();
   }, []);
   return (
     <div className="App">
       <CardHeader>test</CardHeader>
-      <button onClick={() => loginUser()}>LogIn</button>
       <div>Values:</div>
 
       {measurements.measures ? (
-        measurements.measures.map((el) => <li>{el.value_of_measure}</li>)
+        measurements.measures.map((el) => (
+          <li key={el.id}>{el.value_of_measure}</li>
+        ))
       ) : (
         <></>
       )}
