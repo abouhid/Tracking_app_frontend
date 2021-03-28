@@ -16,7 +16,6 @@ export const logInUser = async (data) => {
 };
 
 export const signInUser = async (dataObj) => {
-  console.log("siginuser", dataObj);
   return axios({
     url: `${URL}/signup`,
     data: JSON.stringify(dataObj),

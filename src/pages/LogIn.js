@@ -25,7 +25,6 @@ const LogIn = ({ userData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await logInUser(state);
-    console.log(data, "data login");
     if (data.statusText === "OK") {
       const populateReduxStore = {
         isLoggedIn: true,
