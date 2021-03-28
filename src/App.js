@@ -2,41 +2,70 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { CardHeader } from "@material-ui/core";
+import { logInUser, signInUser } from "./api-requests";
+import { userData } from "./redux/actions";
+import jwt from "jwt-decode";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTY3NzkyMDd9.6Oy2Tt_FJGBG-4xv4sDl5vUlIGAusyKv1djal9i3D00";
-
-// const name = "bbb";
-// const password = "bbb";
-// const password_confirmation = "bbb";
-// const email = "1234@gmail.com";
-// export const logInUser = (data) =>
-//   axios({
-//     url: `${URL}/auth/login`,
-//     data: JSON.stringify(data),
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((res) => res)
-//     .catch((err) => err);
-
-function App() {
+function App({ isLoggedIn }) {
   const [measurements, setMeasurements] = useState("");
+  const [signIn, setSignIn] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setSignIn((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = await signInUser(signIn);
+    console.log("data", jwt(data.data.auth_token), data);
+    if (data.statusText === "Created") {
+      const userInfo = {
+        isLoggedIn: true,
+        userToken: data.data.auth_token,
+        userInfo: jwt(data.data.auth_token).email,
+      };
+      userData(userInfo);
+      // history.push("/");
+    }
+  };
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    // const data = await logInUser(signIn);
+    // console.log(data);
+    // console.log("jwt", jwt(data.data.auth_token));
+    // if (data.statusText === "Created") {
+    //   const userInfo = {
+    //     isLoggedIn: true,
+    //     userToken: data.data.auth_token,
+    //     userInfo: jwt(data.data.auth_token).name,
+    //     userId: jwt(data.data.auth_token).user_id,
+    //   };
+    //   userData(userInfo);
+    //   // history.push("/");
+    // }
+  };
+
   const addMeasure = async (data) => {
     await axios({
       url: `http://localhost:3001/measurements/${data.id}/measures`,
       data: { value_of_measure: "321" },
       method: "POST",
       headers: {
-        Authorization: `Basic ${token}`,
         "Content-Type": "application/json",
       },
     })
       .then(function (response) {
-        console.log(response);
+        console.log("response");
         // setMeasurements(response.data);
       })
       .catch(function (error) {
@@ -44,36 +73,54 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    const loginUser = async () => {
-      // await axios
-      //   .post(
-      //     `http://localhost:3001/signup?name=${name}&password=${password}&password_confirmation=${password_confirmation}&email=${email}`
-      //   )
-      //   .then(function (response) {
-      //     console.log("LOGGED IN", response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log("ERROR", error);
-      //   });
-      await axios
-        .get("http://localhost:3001/measurements", {
-          headers: {
-            Authorization: `Basic ${token}`,
-          },
-        })
-        .then(function (response) {
-          setMeasurements(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    };
-    loginUser();
-  }, []);
+  // useEffect(() => {
+
+  //     await axios
+  //       .get("http://localhost:3001/measurements", {
+  //         headers: {
+  //           Authorization: `Basic ${token}`,
+  //         },
+  //       })
+  //       .then(function (response) {
+  //         setMeasurements(response.data);
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       });
+  //   };
+  //   loginUser();
+  // }, []);
   return (
     <div className="App">
-      <CardHeader>test</CardHeader>
+      <button onClick={(e) => handleSubmit2(e)}>Log in</button>
+      <h4>State of user: {isLoggedIn}</h4>
+      <form>
+        <h1>Log In</h1>
+        <input
+          type="text"
+          id="name"
+          placeholder="name"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="password"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          id="password_confirmation"
+          placeholder="password_confirmation"
+          required
+          onChange={handleChange}
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Sign in
+        </button>
+      </form>
       <div>Values:</div>
 
       {measurements[0] ? (
@@ -95,4 +142,12 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatch = {
+  userData,
+};
+
+// App.propTypes = {
+//   userData: PropTypes.func.isRequired,
+// };
+
+export default connect(null, mapDispatch)(App);
