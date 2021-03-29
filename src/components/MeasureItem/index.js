@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
+import EditForm from "../EditForm";
 
 const MeasureItem = ({
   measurements,
@@ -17,6 +18,7 @@ const MeasureItem = ({
     <Grid container>
       <Grid item xs>
         <h4>{data.name}</h4>
+
         <Add
           onClick={() =>
             addMeasure(data, userToken, setFetchRequested, fetchRequested)
@@ -28,6 +30,8 @@ const MeasureItem = ({
         return (
           <Grid container key={value.created_at}>
             <div>{value.value_of_measure}</div>
+            <EditForm />
+
             <DeleteIcon
               onClick={() =>
                 deleteMeasure(

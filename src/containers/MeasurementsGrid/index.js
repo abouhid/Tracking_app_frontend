@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import MeasureItem from "../../components/MeasureItem";
 import MeasurementItem from "../MeasurementItem";
 import { Grid, Button } from "@material-ui/core";
-import Clear from "@material-ui/icons/Clear";
 
-import {
-  addMeasurement,
-  removeMeasurement,
-  getMeasurements,
-} from "../../api-requests";
+import { addMeasurement, getMeasurements } from "../../api-requests";
 
 const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
   const [measurements, setMeasurements] = useState("");
@@ -26,30 +20,17 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
         {measurements[0] ? (
           <>
             {measurements.map((el) => (
-              <Grid item key={el.created_at}>
-                <Clear
-                  onClick={() =>
-                    removeMeasurement(
-                      el,
-                      userInfo,
-                      userToken,
-                      userId,
-                      measurements,
-                      setMeasurements,
-                      fetchRequested,
-                      setFetchRequested
-                    )
-                  }
-                />
-                <MeasureItem
-                  data={el}
-                  fetchRequested={fetchRequested}
-                  setFetchRequested={setFetchRequested}
-                  measurements={measurements}
-                  setMeasurements={setMeasurements}
-                  userToken={userToken}
-                />
-              </Grid>
+              <MeasurementItem
+                key={el.id}
+                el={el}
+                userInfo={userInfo}
+                userToken={userToken}
+                userId={userId}
+                measurements={measurements}
+                setMeasurements={setMeasurements}
+                fetchRequested={fetchRequested}
+                setFetchRequested={setFetchRequested}
+              />
             ))}
           </>
         ) : (
