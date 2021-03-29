@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-import Measurement from "../components/Measurement";
+import MeasureItem from "../components/MeasureItem";
 
 const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
   const [measurements, setMeasurements] = useState("");
@@ -43,6 +43,25 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
         console.log(error);
       });
   };
+  const removeMeasurement = async () => {
+    await axios({
+      url: `http://localhost:3001/measurements/`,
+      data: {
+        name: "New one yo",
+        created_by: userId,
+      },
+      method: "DELETE",
+      headers: {
+        Authorization: `Basic ${userToken}`,
+      },
+    })
+      .then(function (response) {
+        setMeasurements((prevState) => [...prevState, response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -50,13 +69,22 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
       <div style={{ display: "flex" }}>
         {measurements[0] ? (
           <>
-            <Measurement
-              fetchRequested={fetchRequested}
-              setFetchRequested={setFetchRequested}
-              measurements={measurements}
-              setMeasurements={setMeasurements}
-              userToken={userToken}
-            />
+            {measurements.map((el) => (
+              <div key={el.created_at}>
+                <MeasureItem
+                  data={el}
+                  fetchRequested={fetchRequested}
+                  setFetchRequested={setFetchRequested}
+                  measurements={measurements}
+                  setMeasurements={setMeasurements}
+                  userToken={userToken}
+                />
+              </div>
+            ))}
+
+            <button onClick={() => removeMeasurement()}>
+              Delete measurement
+            </button>
           </>
         ) : (
           <></>
