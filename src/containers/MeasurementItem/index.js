@@ -5,11 +5,8 @@ import { removeMeasurement } from "../../api-requests";
 import { useHistory } from "react-router-dom";
 const MeasurementItem = ({
   el,
-  userInfo,
   userToken,
   userId,
-  dataInfo,
-  measureData,
   fetchRequested,
   setFetchRequested,
 }) => {
@@ -19,20 +16,17 @@ const MeasurementItem = ({
     <Grid item md={4} onClick={() => history.push(`/measurements/${el.id}`)}>
       <Paper elevation={3} variant="outlined" key={el.created_at}>
         {el.name}
-        <Clear
+        {/* <Clear
           onClick={() =>
             removeMeasurement(
               el,
-              userInfo,
               userToken,
               userId,
-              dataInfo,
-              measureData,
               fetchRequested,
               setFetchRequested
             )
           }
-        />
+        /> */}
       </Paper>
     </Grid>
   );

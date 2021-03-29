@@ -22,6 +22,7 @@ const MeasurementsGrid = ({
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
+  console.log("xxx", userToken, userId, measureData);
   return (
     <>
       <h1>Welcome {userInfo}!</h1>

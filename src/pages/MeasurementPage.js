@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -21,10 +21,12 @@ const MeasurementPage = ({
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
+  console.log(data, "page", dataInfo);
   return (
     <>
       {isLoggedIn ? (
         <>
+          <Link to="/">Home</Link>
           <div className="d-flex justify-content-center mt-3 font-weight-bold"></div>
           <MeasureItem
             id={id}
