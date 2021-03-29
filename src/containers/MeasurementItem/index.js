@@ -11,8 +11,8 @@ const MeasurementItem = ({
   userInfo,
   userToken,
   userId,
-  measurements,
-  setMeasurements,
+  dataInfo,
+  measureData,
   fetchRequested,
   setFetchRequested,
 }) => {
@@ -27,8 +27,8 @@ const MeasurementItem = ({
               userInfo,
               userToken,
               userId,
-              measurements,
-              setMeasurements,
+              dataInfo,
+              measureData,
               fetchRequested,
               setFetchRequested
             )
@@ -38,8 +38,8 @@ const MeasurementItem = ({
           data={el}
           fetchRequested={fetchRequested}
           setFetchRequested={setFetchRequested}
-          measurements={measurements}
-          setMeasurements={setMeasurements}
+          dataInfo={dataInfo}
+          measureData={measureData}
           userToken={userToken}
         />
       </Paper>

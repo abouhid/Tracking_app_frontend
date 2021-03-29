@@ -6,8 +6,8 @@ import Add from "@material-ui/icons/Add";
 import EditForm from "../EditForm";
 
 const MeasureItem = ({
-  measurements,
-  setMeasurements,
+  dataInfo,
+  measureData,
   userToken,
   setFetchRequested,
   fetchRequested,

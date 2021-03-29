@@ -28,7 +28,7 @@ export const signInUser = async (dataObj) => {
     .catch((err) => err);
 };
 
-export const getMeasurements = async (userToken, setMeasurements) => {
+export const getMeasurements = async (userToken, measureData) => {
   await axios
     .get("http://localhost:3001/measurements", {
       headers: {
@@ -36,13 +36,13 @@ export const getMeasurements = async (userToken, setMeasurements) => {
       },
     })
     .then(function (response) {
-      setMeasurements(response.data);
+      measureData({ dataInfo: response.data });
     })
     .catch(function (error) {
       console.log(error);
     });
 };
-export const addMeasurement = async (userToken, userId, setMeasurements) => {
+export const addMeasurement = async (userToken, userId, measureData) => {
   await axios({
     url: `http://localhost:3001/measurements/`,
     data: {
@@ -55,7 +55,7 @@ export const addMeasurement = async (userToken, userId, setMeasurements) => {
     },
   })
     .then(function (response) {
-      setMeasurements((prevState) => [...prevState, response.data]);
+      measureData((prevState) => [...prevState, response.data]);
     })
     .catch(function (error) {
       console.log(error);
@@ -67,7 +67,7 @@ export const removeMeasurement = async (
   userToken,
   userId,
   measurements,
-  setMeasurements,
+  measureData,
   fetchRequested,
   setFetchRequested
 ) => {

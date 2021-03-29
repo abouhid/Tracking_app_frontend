@@ -18,28 +18,26 @@ const MeasurementsGrid = ({
   measureData,
   dataInfo,
 }) => {
-  const [measurements, setMeasurements] = useState("");
   const [fetchRequested, setFetchRequested] = useState(false);
   useEffect(() => {
-    getMeasurements(userToken, setMeasurements);
+    getMeasurements(userToken, measureData);
   }, [fetchRequested]);
 
-  console.log(dataInfo);
   return (
     <>
       <h1>Welcome {userInfo}!</h1>
       <Grid container>
-        {measurements[0] ? (
+        {dataInfo[0] ? (
           <>
-            {measurements.map((el) => (
+            {dataInfo.map((el) => (
               <MeasurementItem
                 key={el.id}
                 el={el}
                 userInfo={userInfo}
                 userToken={userToken}
                 userId={userId}
-                measurements={measurements}
-                setMeasurements={setMeasurements}
+                dataInfo={dataInfo}
+                measureData={measureData}
                 fetchRequested={fetchRequested}
                 setFetchRequested={setFetchRequested}
               />
@@ -48,9 +46,7 @@ const MeasurementsGrid = ({
         ) : (
           <></>
         )}
-        <Button
-          onClick={() => addMeasurement(userToken, userId, setMeasurements)}
-        >
+        <Button onClick={() => addMeasurement(userToken, userId, measureData)}>
           Add new measurement
         </Button>
       </Grid>

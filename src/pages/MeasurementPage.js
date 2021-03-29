@@ -7,8 +7,8 @@ import MeasureItem from "../components/MeasureItem";
 
 const MeasurementPage = ({
   isLoggedIn,
-  measurements,
-  setMeasurements,
+  dataInfo,
+  measureData,
   userToken,
   setFetchRequested,
   fetchRequested,
@@ -22,8 +22,8 @@ const MeasurementPage = ({
           data={data}
           fetchRequested={fetchRequested}
           setFetchRequested={setFetchRequested}
-          measurements={measurements}
-          setMeasurements={setMeasurements}
+          dataInfo={dataInfo}
+          measureData={measureData}
           userToken={userToken}
         />
       </>
