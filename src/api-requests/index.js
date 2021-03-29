@@ -27,3 +27,129 @@ export const signInUser = async (dataObj) => {
     .then((res) => res)
     .catch((err) => err);
 };
+
+export const getMeasurements = async (userToken, setMeasurements) => {
+  await axios
+    .get("http://localhost:3001/measurements", {
+      headers: {
+        Authorization: `Basic ${userToken}`,
+      },
+    })
+    .then(function (response) {
+      setMeasurements(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+export const addMeasurement = async (userToken, userId, setMeasurements) => {
+  await axios({
+    url: `http://localhost:3001/measurements/`,
+    data: {
+      name: "New one yo",
+      created_by: userId,
+    },
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${userToken}`,
+    },
+  })
+    .then(function (response) {
+      setMeasurements((prevState) => [...prevState, response.data]);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+export const removeMeasurement = async (
+  el,
+  userInfo,
+  userToken,
+  userId,
+  measurements,
+  setMeasurements,
+  fetchRequested,
+  setFetchRequested
+) => {
+  await axios({
+    url: `http://localhost:3001/measurements/${el.id}`,
+    data: {
+      name: "New one yo",
+      created_by: userId,
+    },
+    method: "DELETE",
+    headers: {
+      Authorization: `Basic ${userToken}`,
+    },
+  })
+    .then(function (response) {
+      setFetchRequested(!fetchRequested);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+export const addMeasure = async (
+  data,
+  userToken,
+  setFetchRequested,
+  fetchRequested
+) => {
+  await axios({
+    url: `http://localhost:3001/measurements/${data.id}/measures`,
+    data: { value_of_measure: "321", measurement_id: data.id },
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${userToken}`,
+    },
+  })
+    .then(function (response) {
+      setFetchRequested(!fetchRequested);
+    })
+    .catch(function (error) {
+      return error;
+    });
+};
+export const updateMeasure = async (
+  data,
+  userToken,
+  setFetchRequested,
+  fetchRequested
+) => {
+  await axios({
+    url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}`,
+    data: { value_of_measure: "123", measurement_id: data.id },
+    method: "PATCH",
+    headers: {
+      Authorization: `Basic ${userToken}`,
+    },
+  })
+    .then(function (response) {
+      setFetchRequested(!fetchRequested);
+    })
+    .catch(function (error) {
+      return error;
+    });
+};
+
+export const deleteMeasure = async (
+  data,
+  userToken,
+  setFetchRequested,
+  fetchRequested
+) => {
+  await axios({
+    url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}/`,
+    method: "DELETE",
+    headers: {
+      Authorization: `Basic ${userToken}`,
+    },
+  })
+    .then(function (response) {
+      setFetchRequested(!fetchRequested);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};

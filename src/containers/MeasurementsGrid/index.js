@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import MeasureItem from "../../components/MeasureItem";
 import MeasurementItem from "../MeasurementItem";
 import { Grid, Button } from "@material-ui/core";
+import Clear from "@material-ui/icons/Clear";
+
 import {
   addMeasurement,
   removeMeasurement,
   getMeasurements,
-} from "../../api-requests/measurementFetchs";
+} from "../../api-requests";
 
 const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
   const [measurements, setMeasurements] = useState("");
@@ -24,16 +26,8 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
         {measurements[0] ? (
           <>
             {measurements.map((el) => (
-              <div key={el.created_at}>
-                <MeasureItem
-                  data={el}
-                  fetchRequested={fetchRequested}
-                  setFetchRequested={setFetchRequested}
-                  measurements={measurements}
-                  setMeasurements={setMeasurements}
-                  userToken={userToken}
-                />
-                <button
+              <Grid item key={el.created_at}>
+                <Clear
                   onClick={() =>
                     removeMeasurement(
                       el,
@@ -46,10 +40,16 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
                       setFetchRequested
                     )
                   }
-                >
-                  Delete measurement
-                </button>
-              </div>
+                />
+                <MeasureItem
+                  data={el}
+                  fetchRequested={fetchRequested}
+                  setFetchRequested={setFetchRequested}
+                  measurements={measurements}
+                  setMeasurements={setMeasurements}
+                  userToken={userToken}
+                />
+              </Grid>
             ))}
           </>
         ) : (
