@@ -28,20 +28,18 @@ const SignIn = ({ userData }) => {
     e.preventDefault();
     const data = await signInUser(signIn);
     if (data.statusText === "Created") {
-      const populateReduxStore = {
+      userData({
         isLoggedIn: true,
         userToken: data.data.auth_token,
         userInfo: jwt(data.data.auth_token).name,
-      };
-      console.log("populateReduxStore", populateReduxStore);
-      userData(populateReduxStore);
+      });
       history.push("/");
     }
   };
 
   return (
     <form>
-      <h1>Log In</h1>
+      <h1>Sign In</h1>
       <input
         type="text"
         id="name"

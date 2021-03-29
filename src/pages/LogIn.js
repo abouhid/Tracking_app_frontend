@@ -40,7 +40,7 @@ const LogIn = ({ userData }) => {
   return (
     <form>
       <h1>Log In</h1>
-      <h2>Hello there! Log in to start using Find My Wod.</h2>
+      <h2>Log in to your account!</h2>
       <input
         type="email"
         id="email"

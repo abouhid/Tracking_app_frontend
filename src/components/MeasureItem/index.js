@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { Grid, Paper, makeStyles, Button, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
+import Add from "@material-ui/icons/Add";
 
 const MeasureItem = ({
   measurements,
@@ -52,7 +53,6 @@ const MeasureItem = ({
   };
 
   const deleteMeasure = async (data) => {
-    let newObj = false;
     await axios({
       url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}/`,
       method: "DELETE",
@@ -80,21 +80,22 @@ const MeasureItem = ({
   };
 
   return (
-    <>
-      <h4>{data.name}</h4>
+    <Grid container>
+      <Grid item xs>
+        <h4>{data.name}</h4>
+        <Add onClick={() => addMeasure(data)} />
+      </Grid>
+
       {data.measures.map((value) => {
         return (
-          <div key={value.created_at}>
-            <li>{value.value_of_measure}</li>
-            <DeleteIcon onClick={() => deleteMeasure(value)}>
-              Delete measure
-            </DeleteIcon>
-            <Edit onClick={() => updateMeasure(value)}>Update measure</Edit>
-          </div>
+          <Grid container key={value.created_at}>
+            <div>{value.value_of_measure}</div>
+            <DeleteIcon onClick={() => deleteMeasure(value)} />
+            <Edit onClick={() => updateMeasure(value)} />
+          </Grid>
         );
       })}
-      <button onClick={() => addMeasure(data)}>Add new measure</button>
-    </>
+    </Grid>
   );
 };
 
