@@ -2,7 +2,7 @@ import { MEASURE_DATA } from "../actions";
 
 const measureReducer = (
   state = {
-    measurements: [],
+    dataInfo: [],
   },
   action
 ) => {

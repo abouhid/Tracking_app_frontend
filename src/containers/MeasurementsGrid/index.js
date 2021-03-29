@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import MeasurementItem from "../MeasurementItem";
 import { Grid, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+import { measureData } from "../../redux/actions";
+
 import { addMeasurement, getMeasurements } from "../../api-requests";
 
-const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
+const MeasurementsGrid = ({
+  userInfo,
+  userToken,
+  userId,
+  measureData,
+  dataInfo,
+}) => {
   const [measurements, setMeasurements] = useState("");
   const [fetchRequested, setFetchRequested] = useState(false);
   useEffect(() => {
     getMeasurements(userToken, setMeasurements);
   }, [fetchRequested]);
 
+  console.log(dataInfo);
   return (
     <>
       <h1>Welcome {userInfo}!</h1>
@@ -51,7 +62,7 @@ const mapStateToProps = (state) => ({
   userToken: state.userStore.userToken,
   userInfo: state.userStore.userInfo,
   userId: state.userStore.userId,
-  // measurements: state.measureReducer.measurements,
+  dataInfo: state.measureStore.dataInfo,
 });
 
 MeasurementsGrid.propTypes = {
@@ -60,4 +71,8 @@ MeasurementsGrid.propTypes = {
   userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-export default connect(mapStateToProps)(MeasurementsGrid);
+const mapDispatch = {
+  measureData,
+};
+
+export default connect(mapStateToProps, mapDispatch)(MeasurementsGrid);
