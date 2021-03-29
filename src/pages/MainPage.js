@@ -6,7 +6,19 @@ import MeasurementsGrid from "../containers/MeasurementsGrid";
 
 const MainPage = ({ isLoggedIn }) => {
   if (isLoggedIn) {
-    return <MeasurementsGrid />;
+    const todaysDate = new Date();
+    const result = todaysDate.toUTCString().split(" ");
+    result.splice(4, 2);
+    const finalValue = result.join(" ");
+
+    return (
+      <>
+        <div className="d-flex justify-content-center mt-3 font-weight-bold">
+          {finalValue}
+        </div>
+        <MeasurementsGrid />
+      </>
+    );
   }
   return <HomePage />;
 };

@@ -1,8 +1,7 @@
 import React from "react";
-import { addMeasure, updateMeasure, deleteMeasure } from "../../api-requests";
+import { addMeasure, deleteMeasure } from "../../api-requests";
 import { Grid } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import EditForm from "../EditForm";
 
@@ -17,8 +16,6 @@ const MeasureItem = ({
   return (
     <Grid container>
       <Grid item xs>
-        <h4>{data.name}</h4>
-
         <Add
           onClick={() =>
             addMeasure(data, userToken, setFetchRequested, fetchRequested)
@@ -28,10 +25,7 @@ const MeasureItem = ({
 
       {data.measures.map((value) => {
         return (
-          <Grid container key={value.created_at}>
-            <div>{value.value_of_measure}</div>
-            <EditForm />
-
+          <Grid key={value.created_at} container>
             <DeleteIcon
               onClick={() =>
                 deleteMeasure(
@@ -42,15 +36,12 @@ const MeasureItem = ({
                 )
               }
             />
-            <Edit
-              onClick={() =>
-                updateMeasure(
-                  value,
-                  userToken,
-                  setFetchRequested,
-                  fetchRequested
-                )
-              }
+            <div>{value.value_of_measure}</div>
+            <EditForm
+              userToken={userToken}
+              value={value}
+              setFetchRequested={setFetchRequested}
+              fetchRequested={fetchRequested}
             />
           </Grid>
         );

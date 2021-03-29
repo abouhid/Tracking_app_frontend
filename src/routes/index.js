@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LogIn from "../pages/LogIn";
 import MainPage from "../pages/MainPage";
+import MeasurementPage from "../pages/MeasurementPage";
 import SigIn from "../pages/SignIn";
 
 const Routes = () => (
@@ -10,6 +11,7 @@ const Routes = () => (
       <Route exact path="/" component={MainPage} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/signin" component={SigIn} />
+      <Route exact path="/measurements/:id" component={MeasurementPage} />
     </Switch>
   </BrowserRouter>
 );

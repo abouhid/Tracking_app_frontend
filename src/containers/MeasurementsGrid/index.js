@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasurementItem from "../MeasurementItem";
 import { Grid, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import { addMeasurement, getMeasurements } from "../../api-requests";
 
@@ -50,6 +51,7 @@ const mapStateToProps = (state) => ({
   userToken: state.userStore.userToken,
   userInfo: state.userStore.userInfo,
   userId: state.userStore.userId,
+  // measurements: state.measureReducer.measurements,
 });
 
 MeasurementsGrid.propTypes = {
