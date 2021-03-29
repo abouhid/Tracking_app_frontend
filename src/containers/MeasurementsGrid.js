@@ -6,7 +6,7 @@ import Measurement from "../components/Measurement";
 
 const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
   const [measurements, setMeasurements] = useState("");
-
+  const [fetchRequested, setFetchRequested] = useState(false);
   useEffect(() => {
     const getMeasurements = async () => {
       await axios
@@ -23,7 +23,7 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
         });
     };
     getMeasurements();
-  }, []);
+  }, [fetchRequested]);
   const addMeasurement = async () => {
     await axios({
       url: `http://localhost:3001/measurements/`,
@@ -51,6 +51,8 @@ const MeasurementsGrid = ({ userInfo, userToken, userId }) => {
         {measurements[0] ? (
           <>
             <Measurement
+              fetchRequested={fetchRequested}
+              setFetchRequested={setFetchRequested}
               measurements={measurements}
               setMeasurements={setMeasurements}
               userToken={userToken}

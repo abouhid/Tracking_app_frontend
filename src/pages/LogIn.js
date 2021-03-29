@@ -29,7 +29,7 @@ const LogIn = ({ userData }) => {
       const populateReduxStore = {
         isLoggedIn: true,
         userToken: data.data.auth_token,
-        userInfo: jwt(data.data.auth_token).email,
+        userInfo: jwt(data.data.auth_token).name,
         userId: jwt(data.data.auth_token).user_id,
       };
       userData(populateReduxStore);

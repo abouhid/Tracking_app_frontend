@@ -1,7 +1,13 @@
 import React from "react";
 import axios from "axios";
 
-const Measurement = ({ measurements, setMeasurements, userToken }) => {
+const Measurement = ({
+  measurements,
+  setMeasurements,
+  userToken,
+  setFetchRequested,
+  fetchRequested,
+}) => {
   const addMeasure = async (data) => {
     await axios({
       url: `http://localhost:3001/measurements/${data.id}/measures`,
@@ -11,20 +17,37 @@ const Measurement = ({ measurements, setMeasurements, userToken }) => {
         Authorization: `Basic ${userToken}`,
       },
     })
+      //   .then(function (response) {
+      //     const updatedMeasurements = measurements.map(
+      //       (obj) => [response.data].find((o) => o.id === obj.id) || obj
+      //     );
+      //     setMeasurements(updatedMeasurements);
+      //   })
       .then(function (response) {
-        console.log(response);
-        const updatedMeasurements = measurements.map(
-          (obj) => [response.data].find((o) => o.id === obj.id) || obj
-        );
-        setMeasurements(updatedMeasurements);
+        setFetchRequested(!fetchRequested);
       })
       .catch(function (error) {
-        console.log(error);
+        return error;
+      });
+  };
+  const updateMeasure = async (data) => {
+    await axios({
+      url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}`,
+      data: { value_of_measure: "123", measurement_id: data.id },
+      method: "PATCH",
+      headers: {
+        Authorization: `Basic ${userToken}`,
+      },
+    })
+      .then(function (response) {
+        setFetchRequested(!fetchRequested);
+      })
+      .catch(function (error) {
+        return error;
       });
   };
 
   const deleteMeasure = async (data) => {
-    console.log(data);
     let newObj = false;
     await axios({
       url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}/`,
@@ -33,16 +56,19 @@ const Measurement = ({ measurements, setMeasurements, userToken }) => {
         Authorization: `Basic ${userToken}`,
       },
     })
-      .then(function (response) {
-        const updatedMeasurements = measurements.map((obj) => {
-          if (obj.id === data.measurement_id) {
-            const index = obj.measures.map((el) => el.id).indexOf(data.id);
-            obj.measures.splice(index, 1);
-          }
-          return obj;
-        });
+      //   .then(function (response) {
+      //     const updatedMeasurements = measurements.map((obj) => {
+      //       if (obj.id === data.measurement_id) {
+      //         const index = obj.measures.map((el) => el.id).indexOf(data.id);
+      //         obj.measures.splice(index, 1);
+      //       }
+      //       return obj;
+      //     });
 
-        setMeasurements(updatedMeasurements);
+      //     setMeasurements(updatedMeasurements);
+      //   })
+      .then(function (response) {
+        setFetchRequested(!fetchRequested);
       })
       .catch(function (error) {
         console.log(error);
@@ -60,6 +86,9 @@ const Measurement = ({ measurements, setMeasurements, userToken }) => {
                 <li>{value.value_of_measure}</li>
                 <button onClick={() => deleteMeasure(value)}>
                   Delete measure
+                </button>
+                <button onClick={() => updateMeasure(value)}>
+                  Update measure
                 </button>
               </div>
             );
