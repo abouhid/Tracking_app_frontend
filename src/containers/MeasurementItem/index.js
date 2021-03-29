@@ -2,10 +2,7 @@ import React from "react";
 import { Grid, Paper } from "@material-ui/core";
 import Clear from "@material-ui/icons/Clear";
 import { removeMeasurement } from "../../api-requests";
-import MeasureItem from "../../components/MeasureItem";
-import { Link } from "react-router-dom";
-import MeasurementPage from "../../pages/MeasurementPage";
-
+import { useHistory } from "react-router-dom";
 const MeasurementItem = ({
   el,
   userInfo,
@@ -16,8 +13,10 @@ const MeasurementItem = ({
   fetchRequested,
   setFetchRequested,
 }) => {
+  const history = useHistory();
+
   return (
-    <Grid item md={4}>
+    <Grid item md={4} onClick={() => history.push(`/measurements/${el.id}`)}>
       <Paper elevation={3} variant="outlined" key={el.created_at}>
         {el.name}
         <Clear
@@ -33,14 +32,6 @@ const MeasurementItem = ({
               setFetchRequested
             )
           }
-        />
-        <MeasurementPage
-          data={el}
-          fetchRequested={fetchRequested}
-          setFetchRequested={setFetchRequested}
-          dataInfo={dataInfo}
-          measureData={measureData}
-          userToken={userToken}
         />
       </Paper>
     </Grid>

@@ -63,11 +63,9 @@ export const addMeasurement = async (userToken, userId, measureData) => {
 };
 export const removeMeasurement = async (
   el,
-  userInfo,
   userToken,
   userId,
-  measurements,
-  measureData,
+
   fetchRequested,
   setFetchRequested
 ) => {

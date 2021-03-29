@@ -6,24 +6,29 @@ import Add from "@material-ui/icons/Add";
 import EditForm from "../EditForm";
 
 const MeasureItem = ({
-  dataInfo,
-  measureData,
+  id,
   userToken,
   setFetchRequested,
   fetchRequested,
-  data,
+  dataInfo,
 }) => {
+  const currentData = dataInfo[id - 1];
   return (
     <Grid container>
       <Grid item xs>
         <Add
           onClick={() =>
-            addMeasure(data, userToken, setFetchRequested, fetchRequested)
+            addMeasure(
+              currentData,
+              userToken,
+              setFetchRequested,
+              fetchRequested
+            )
           }
         />
       </Grid>
 
-      {data.measures.map((value) => {
+      {currentData.measures.map((value) => {
         return (
           <Grid key={value.created_at} container>
             <DeleteIcon
