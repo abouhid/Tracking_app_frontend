@@ -14,7 +14,17 @@ code {
 
 .mainApp {
   background-color: #addc91;
-  border: 12px solid #67899c;
+  border-radius: 10px;
+  /* min-height: 80vh; */
+  margin-top: 10vh;
+}
+
+.HomePage,
+.MainPage,
+.LogIn,
+.MeasurementPage,
+.SignIn {
+  height: 75vh;
 }
 
 /* 67899c

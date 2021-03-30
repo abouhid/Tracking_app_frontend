@@ -12,13 +12,13 @@ const MainPage = ({ isLoggedIn }) => {
     const finalValue = result.join(" ");
 
     return (
-      <>
+      <div className="MainPage">
         <div className="d-flex justify-content-center mt-3 font-weight-bold">
           {finalValue}
         </div>
 
         <MeasurementsGrid />
-      </>
+      </div>
     );
   }
   return <HomePage />;

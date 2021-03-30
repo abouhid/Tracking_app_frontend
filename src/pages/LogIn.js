@@ -38,27 +38,29 @@ const LogIn = ({ userData }) => {
   };
 
   return (
-    <form>
-      <h1>Log In</h1>
-      <h2>Log in to your account!</h2>
-      <input
-        type="email"
-        id="email"
-        placeholder="email"
-        required
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        id="password"
-        placeholder="password"
-        required
-        onChange={handleChange}
-      />
-      <button type="submit" onClick={handleSubmit}>
-        Log In
-      </button>
-    </form>
+    <div className="LogIn">
+      <form>
+        <h1>Log In</h1>
+        <h2>Log in to your account!</h2>
+        <input
+          type="email"
+          id="email"
+          placeholder="email"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="password"
+          required
+          onChange={handleChange}
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Log In
+        </button>
+      </form>
+    </div>
   );
 };
 

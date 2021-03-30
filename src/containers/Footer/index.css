@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  background-color: #67899c !important;
+  justify-content: space-between !important;
 }
 
 .footer :focus {

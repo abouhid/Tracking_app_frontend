@@ -23,7 +23,7 @@ const MeasurementPage = ({
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
   return (
-    <>
+    <div className="LogIn">
       {isLoggedIn ? (
         <>
           <Clear
@@ -53,7 +53,7 @@ const MeasurementPage = ({
       ) : (
         <HomePage />
       )}
-    </>
+    </div>
   );
 };
 

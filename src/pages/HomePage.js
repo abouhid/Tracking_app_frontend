@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <>
+    <div className="HomePage">
       <p>You are not logged in!</p>
       <Link to={{ pathname: "/login" }}>Log In</Link>
       <Link to={{ pathname: "/signin" }}>Sign In</Link>
-    </>
+    </div>
   );
 };
 

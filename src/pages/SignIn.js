@@ -38,40 +38,42 @@ const SignIn = ({ userData }) => {
   };
 
   return (
-    <form>
-      <h1>Sign In</h1>
-      <input
-        type="text"
-        id="name"
-        placeholder="name"
-        required
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        id="email"
-        placeholder="email"
-        required
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        id="password"
-        placeholder="password"
-        required
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        id="password_confirmation"
-        placeholder="password_confirmation"
-        required
-        onChange={handleChange}
-      />
-      <button type="submit" onClick={handleSubmit}>
-        Sign in
-      </button>
-    </form>
+    <div className="SignIn">
+      <form>
+        <h1>Sign In</h1>
+        <input
+          type="text"
+          id="name"
+          placeholder="name"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          id="email"
+          placeholder="email"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="password"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          id="password_confirmation"
+          placeholder="password_confirmation"
+          required
+          onChange={handleChange}
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Sign in
+        </button>
+      </form>
+    </div>
   );
 };
 

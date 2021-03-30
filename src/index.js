@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import userReducer from "./redux/reducers/user";
 import measureReducer from "./redux/reducers/measures";
 import { Grid } from "@material-ui/core";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Routes from "./routes";
 import "./index.css";
@@ -21,7 +22,9 @@ ReactDOM.render(
   <Grid container direction="row" justify="center" alignItems="center">
     <Grid item md={3}></Grid>
     <Grid
+      sm={6}
       md={6}
+      lg={4}
       container
       direction="column"
       justify="center"
