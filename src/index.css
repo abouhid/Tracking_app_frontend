@@ -5,8 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: grey;
-  margin: 4%;
 }
 
 code {
@@ -14,11 +12,11 @@ code {
     monospace;
 }
 
-#root {
-  padding: 3%;
-  align-items: center;
-  background-color: white;
-  border-radius: 10px;
-  min-height: 80vh;
-  max-height: fit-content;
+.mainApp {
+  background-color: #addc91;
+  border: 12px solid #67899c;
 }
+
+/* 67899c
+62b5e5
+addc91 */

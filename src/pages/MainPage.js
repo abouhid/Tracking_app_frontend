@@ -16,6 +16,7 @@ const MainPage = ({ isLoggedIn }) => {
         <div className="d-flex justify-content-center mt-3 font-weight-bold">
           {finalValue}
         </div>
+
         <MeasurementsGrid />
       </>
     );

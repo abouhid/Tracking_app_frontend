@@ -1,0 +1,8 @@
+.footer {
+  width: 100%;
+  background-color: #67899c !important;
+}
+
+.footer :focus {
+  background-color: #62b5e5;
+}

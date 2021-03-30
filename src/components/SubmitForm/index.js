@@ -32,7 +32,7 @@ const SubmitForm = ({
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      measure: 0,
+      measure: "",
     }
   );
 
@@ -90,7 +90,7 @@ const SubmitForm = ({
         <form onSubmit={handleSubmit}>
           <TextField
             type={measurementForm ? "any" : "number"}
-            label={measurementForm ? formType : buttonText + " Measure"}
+            label={measurementForm ? formType : buttonText + " Measure (cm)"}
             id="margin-normal"
             name="measure"
             defaultValue={formInput.measure}
