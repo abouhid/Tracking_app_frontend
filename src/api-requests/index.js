@@ -38,11 +38,17 @@ export const getMeasurements = async (userToken, measureData) => {
     .then(function (response) {
       measureData({ dataInfo: response.data });
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      return error;
     });
 };
-export const addMeasurement = async (userToken, userId, measureData) => {
+export const addMeasurement = async (
+  userToken,
+  userId,
+  measureData,
+  fetchRequested,
+  setFetchRequested
+) => {
   await axios({
     url: `http://localhost:3001/measurements/`,
     data: {
@@ -55,21 +61,21 @@ export const addMeasurement = async (userToken, userId, measureData) => {
     },
   })
     .then(function (response) {
-      measureData((prevState) => [...prevState, response.data]);
+      setFetchRequested(!fetchRequested);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      return error;
     });
 };
 export const removeMeasurement = async (
-  el,
+  id,
   userToken,
   userId,
   fetchRequested,
   setFetchRequested
 ) => {
   await axios({
-    url: `http://localhost:3001/measurements/${el.id}`,
+    url: `http://localhost:3001/measurements/${id}`,
     data: {
       name: "New one yo",
       created_by: userId,
@@ -82,8 +88,8 @@ export const removeMeasurement = async (
     .then(function (response) {
       setFetchRequested(!fetchRequested);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      return error;
     });
 };
 
@@ -104,7 +110,7 @@ export const addMeasure = async (
     .then(function (response) {
       setFetchRequested(!fetchRequested);
     })
-    .catch(function (error) {
+    .catch((error) => {
       return error;
     });
 };
@@ -146,7 +152,7 @@ export const deleteMeasure = async (
     .then(function (response) {
       setFetchRequested(!fetchRequested);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      return error;
     });
 };

@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import HomePage from "./HomePage";
 import MeasureItem from "../components/MeasureItem";
-import { addMeasurement, getMeasurements } from "../api-requests";
+import Clear from "@material-ui/icons/Clear";
+import {
+  addMeasurement,
+  getMeasurements,
+  removeMeasurement,
+} from "../api-requests";
 
 const MeasurementPage = ({
   isLoggedIn,
   dataInfo,
   measureData,
   userToken,
-
-  data,
+  userId,
 }) => {
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
-  console.log(data, "page", dataInfo);
   return (
     <>
       {isLoggedIn ? (
@@ -35,6 +39,18 @@ const MeasurementPage = ({
             dataInfo={dataInfo}
             measureData={measureData}
             userToken={userToken}
+          />
+          <Clear
+            onClick={async () => {
+              await removeMeasurement(
+                id,
+                userToken,
+                userId,
+                fetchRequested,
+                setFetchRequested
+              );
+              history.push(`/`);
+            }}
           />
         </>
       ) : (

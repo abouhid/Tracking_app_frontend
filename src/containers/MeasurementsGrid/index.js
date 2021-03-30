@@ -22,7 +22,6 @@ const MeasurementsGrid = ({
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
-  console.log("xxx", userToken, userId, measureData);
   return (
     <>
       <h1>Welcome {userInfo}!</h1>
@@ -47,7 +46,17 @@ const MeasurementsGrid = ({
         ) : (
           <></>
         )}
-        <Button onClick={() => addMeasurement(userToken, userId, measureData)}>
+        <Button
+          onClick={() =>
+            addMeasurement(
+              userToken,
+              userId,
+              measureData,
+              fetchRequested,
+              setFetchRequested
+            )
+          }
+        >
           Add new measurement
         </Button>
       </Grid>

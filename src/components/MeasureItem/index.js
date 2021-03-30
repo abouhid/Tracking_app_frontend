@@ -12,7 +12,6 @@ const MeasureItem = ({
   fetchRequested,
   dataInfo,
 }) => {
-  console.log("datainfo", dataInfo);
   const currentData = dataInfo.find((el) => el.id == id);
   return (
     <Grid container>
