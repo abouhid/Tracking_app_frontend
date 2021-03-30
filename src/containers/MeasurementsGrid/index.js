@@ -8,6 +8,7 @@ import { Grid, Button } from "@material-ui/core";
 import { measureData } from "../../redux/actions";
 
 import { addMeasurement, getMeasurements } from "../../api-requests";
+import SubmitForm from "../../components/SubmitForm";
 
 const MeasurementsGrid = ({
   userInfo,
@@ -29,35 +30,20 @@ const MeasurementsGrid = ({
         {dataInfo[0] ? (
           <>
             {dataInfo.map((el) => (
-              <MeasurementItem
-                key={el.id}
-                el={el}
-                userInfo={userInfo}
-                userToken={userToken}
-                userId={userId}
-                dataInfo={dataInfo}
-                measureData={measureData}
-                fetchRequested={fetchRequested}
-                setFetchRequested={setFetchRequested}
-              />
+              <MeasurementItem el={el} />
             ))}
           </>
         ) : (
           <></>
         )}
-        <Button
-          onClick={() =>
-            addMeasurement(
-              userToken,
-              userId,
-              measureData,
-              fetchRequested,
-              setFetchRequested
-            )
-          }
-        >
-          Add new measurement
-        </Button>
+
+        <SubmitForm
+          userToken={userToken}
+          value={dataInfo}
+          setFetchRequested={setFetchRequested}
+          fetchRequested={fetchRequested}
+          formType={"Add Measurement"}
+        />
       </Grid>
     </>
   );

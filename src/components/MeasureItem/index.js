@@ -10,6 +10,7 @@ const MeasureItem = ({
   setFetchRequested,
   fetchRequested,
   dataInfo,
+  userId,
 }) => {
   const currentData = dataInfo.find((el) => el.id == id);
   const noMeasures = currentData.measures.length == 0;
@@ -44,6 +45,7 @@ const MeasureItem = ({
                 setFetchRequested={setFetchRequested}
                 fetchRequested={fetchRequested}
                 formType={"EDIT"}
+                userId={userId}
               />
             </Grid>
           </div>

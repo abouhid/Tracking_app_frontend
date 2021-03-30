@@ -46,13 +46,13 @@ export const addMeasurement = async (
   userToken,
   userId,
   fetchRequested,
-  setFetchRequested
+  setFetchRequested,
+  inputValue
 ) => {
-  debugger;
   await axios({
     url: `http://localhost:3001/measurements/`,
     data: {
-      name: "New one yo",
+      name: inputValue,
       created_by: userId,
     },
     method: "POST",

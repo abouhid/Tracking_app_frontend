@@ -10,7 +10,7 @@ import {
   Grid,
   TextField,
 } from "@material-ui/core";
-import { updateMeasure, addMeasure } from "../../api-requests";
+import { updateMeasure, addMeasure, addMeasurement } from "../../api-requests";
 import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import { Icon } from "@material-ui/core";
@@ -21,9 +21,12 @@ const SubmitForm = ({
   setFetchRequested,
   fetchRequested,
   formType,
+  userId,
 }) => {
   const [checked, setChecked] = React.useState(false);
   const editForm = formType === "EDIT";
+  const measurementForm = formType === "Add Measurement";
+
   const buttonText = editForm ? "Edit" : "Add";
 
   const [formInput, setFormInput] = useReducer(
@@ -42,6 +45,14 @@ const SubmitForm = ({
           userToken,
           setFetchRequested,
           fetchRequested,
+          inputValue
+        )
+      : measurementForm
+      ? addMeasurement(
+          userToken,
+          userId,
+          fetchRequested,
+          setFetchRequested,
           inputValue
         )
       : addMeasure(
@@ -78,18 +89,19 @@ const SubmitForm = ({
       <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
         <form onSubmit={handleSubmit}>
           <TextField
-            type="number"
-            label={`${buttonText} measure (cm)`}
+            type={measurementForm ? "any" : "number"}
+            label={measurementForm ? formType : buttonText + " Measure"}
             id="margin-normal"
             name="measure"
             defaultValue={formInput.measure}
-            helperText="Use only numbers"
+            helperText={measurementForm ? "" : "Use only numbers"}
             onChange={handleInput}
             required={true}
           />
 
           <Button type="submit" variant="contained" color="primary">
-            {buttonText} Measure <Icon>send</Icon>
+            {measurementForm ? formType : buttonText + " Measure"}
+            <Icon>send</Icon>
           </Button>
         </form>
       </Slide>

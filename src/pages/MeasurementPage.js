@@ -26,16 +26,6 @@ const MeasurementPage = ({
     <>
       {isLoggedIn ? (
         <>
-          <Link to="/">Home</Link>
-          <div className="d-flex justify-content-center mt-3 font-weight-bold"></div>
-          <MeasureItem
-            id={id}
-            fetchRequested={fetchRequested}
-            setFetchRequested={setFetchRequested}
-            dataInfo={dataInfo}
-            measureData={measureData}
-            userToken={userToken}
-          />
           <Clear
             onClick={async () => {
               await removeMeasurement(
@@ -47,6 +37,17 @@ const MeasurementPage = ({
               );
               history.push(`/`);
             }}
+          />
+          <Link to="/">Home</Link>
+          <div className="d-flex justify-content-center mt-3 font-weight-bold"></div>
+          <MeasureItem
+            id={id}
+            userI={userId}
+            fetchRequested={fetchRequested}
+            setFetchRequested={setFetchRequested}
+            dataInfo={dataInfo}
+            measureData={measureData}
+            userToken={userToken}
           />
         </>
       ) : (
