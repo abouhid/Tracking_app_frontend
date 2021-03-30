@@ -45,10 +45,10 @@ export const getMeasurements = async (userToken, measureData) => {
 export const addMeasurement = async (
   userToken,
   userId,
-  measureData,
   fetchRequested,
   setFetchRequested
 ) => {
+  debugger;
   await axios({
     url: `http://localhost:3001/measurements/`,
     data: {
@@ -97,11 +97,12 @@ export const addMeasure = async (
   data,
   userToken,
   setFetchRequested,
-  fetchRequested
+  fetchRequested,
+  inputValue
 ) => {
   await axios({
     url: `http://localhost:3001/measurements/${data.id}/measures`,
-    data: { value_of_measure: "321", measurement_id: data.id },
+    data: { value_of_measure: inputValue, measurement_id: data.id },
     method: "POST",
     headers: {
       Authorization: `Basic ${userToken}`,
@@ -118,11 +119,12 @@ export const updateMeasure = async (
   data,
   userToken,
   setFetchRequested,
-  fetchRequested
+  fetchRequested,
+  inputValue
 ) => {
   await axios({
     url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}`,
-    data: { value_of_measure: "123", measurement_id: data.id },
+    data: { value_of_measure: inputValue, measurement_id: data.id },
     method: "PATCH",
     headers: {
       Authorization: `Basic ${userToken}`,

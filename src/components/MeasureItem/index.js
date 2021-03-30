@@ -16,51 +16,39 @@ const MeasureItem = ({
 
   return (
     <Grid container>
-      {noMeasures ? (
-        <SubmitForm
-          userToken={userToken}
-          value={currentData}
-          setFetchRequested={setFetchRequested}
-          fetchRequested={fetchRequested}
-          formType={"ADD"}
-        />
-      ) : (
-        currentData.measures.map((value) => {
-          return (
-            <div key={value.id}>
-              <Grid item xs>
-                <SubmitForm
-                  userToken={userToken}
-                  value={currentData}
-                  setFetchRequested={setFetchRequested}
-                  fetchRequested={fetchRequested}
-                  formType={"ADD"}
-                />
-              </Grid>
-              <Grid key={value.created_at} container>
-                <DeleteIcon
-                  onClick={() =>
-                    deleteMeasure(
-                      value,
-                      userToken,
-                      setFetchRequested,
-                      fetchRequested
-                    )
-                  }
-                />
-                <div>{value.value_of_measure}</div>
-                <SubmitForm
-                  userToken={userToken}
-                  value={value}
-                  setFetchRequested={setFetchRequested}
-                  fetchRequested={fetchRequested}
-                  formType={"EDIT"}
-                />
-              </Grid>
-            </div>
-          );
-        })
-      )}
+      <SubmitForm
+        userToken={userToken}
+        value={currentData}
+        setFetchRequested={setFetchRequested}
+        fetchRequested={fetchRequested}
+        formType={"ADD"}
+      />
+      {currentData.measures.map((value) => {
+        return (
+          <div key={value.id}>
+            <Grid key={value.created_at} container>
+              <DeleteIcon
+                onClick={() =>
+                  deleteMeasure(
+                    value,
+                    userToken,
+                    setFetchRequested,
+                    fetchRequested
+                  )
+                }
+              />
+              <div>{value.value_of_measure}</div>
+              <SubmitForm
+                userToken={userToken}
+                value={value}
+                setFetchRequested={setFetchRequested}
+                fetchRequested={fetchRequested}
+                formType={"EDIT"}
+              />
+            </Grid>
+          </div>
+        );
+      })}
     </Grid>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import {
   FormControl,
   Button,
@@ -8,6 +8,7 @@ import {
   Slide,
   FormControlLabel,
   Grid,
+  TextField,
 } from "@material-ui/core";
 import { updateMeasure, addMeasure } from "../../api-requests";
 import Edit from "@material-ui/icons/Edit";
@@ -23,7 +24,43 @@ const SubmitForm = ({
 }) => {
   const [checked, setChecked] = React.useState(false);
   const editForm = formType === "EDIT";
-  const buttonText = editForm ? "Edit Measure" : "Add Measure";
+  const buttonText = editForm ? "Edit" : "Add";
+
+  const [formInput, setFormInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      measure: 0,
+    }
+  );
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    let inputValue = formInput.measure;
+    editForm
+      ? updateMeasure(
+          value,
+          userToken,
+          setFetchRequested,
+          fetchRequested,
+          inputValue
+        )
+      : addMeasure(
+          value,
+          userToken,
+          setFetchRequested,
+          fetchRequested,
+          inputValue
+        );
+
+    setChecked(!checked);
+    setFormInput({ measure: "" });
+  };
+
+  const handleInput = (evt) => {
+    const name = evt.target.name;
+    const newValue = evt.target.value;
+    setFormInput({ [name]: newValue });
+  };
 
   return (
     <Grid item>
@@ -31,48 +68,30 @@ const SubmitForm = ({
         control={
           <>
             {editForm ? (
-              <Edit
-                onClick={() => {
-                  setChecked(!checked);
-                  updateMeasure(
-                    value,
-                    userToken,
-                    setFetchRequested,
-                    fetchRequested
-                  );
-                }}
-              />
+              <Edit onClick={() => setChecked(!checked)} />
             ) : (
-              <Add
-                onClick={() =>
-                  addMeasure(
-                    value,
-                    userToken,
-                    setFetchRequested,
-                    fetchRequested
-                  )
-                }
-              />
+              <Add onClick={() => setChecked(!checked)} />
             )}
           </>
         }
       />
       <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Add measure (cm)</InputLabel>
-          <Input
+        <form onSubmit={handleSubmit}>
+          <TextField
             type="number"
+            label={`${buttonText} measure (cm)`}
+            id="margin-normal"
+            name="measure"
+            defaultValue={formInput.measure}
+            helperText="Use only numbers"
+            onChange={handleInput}
             required={true}
-            id="my-input"
-            aria-describedby="my-helper-text"
           />
-          <FormHelperText id="my-helper-text">
-            Type only numbers.
-          </FormHelperText>
+
           <Button type="submit" variant="contained" color="primary">
-            {buttonText} <Icon>send</Icon>
+            {buttonText} Measure <Icon>send</Icon>
           </Button>
-        </FormControl>
+        </form>
       </Slide>
     </Grid>
   );
