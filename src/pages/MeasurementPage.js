@@ -6,11 +6,7 @@ import { connect } from "react-redux";
 import HomePage from "./HomePage";
 import MeasureItem from "../components/MeasureItem";
 import Clear from "@material-ui/icons/Clear";
-import {
-  addMeasurement,
-  getMeasurements,
-  removeMeasurement,
-} from "../api-requests";
+import { getMeasurements, removeMeasurement } from "../api-requests";
 
 const MeasurementPage = ({
   isLoggedIn,

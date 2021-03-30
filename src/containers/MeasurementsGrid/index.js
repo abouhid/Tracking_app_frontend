@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import MeasurementItem from "../MeasurementItem";
 import { Grid, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 import { measureData } from "../../redux/actions";
 
