@@ -29,13 +29,12 @@ const LogIn = ({ userData }) => {
     e.preventDefault();
     const data = await logInUser(state);
     if (data.statusText === "OK") {
-      const populateReduxStore = {
+      userData({
         isLoggedIn: true,
         userToken: data.data.auth_token,
         userInfo: jwt(data.data.auth_token).name,
         userId: jwt(data.data.auth_token).user_id,
-      };
-      userData(populateReduxStore);
+      });
       history.push("/");
     }
   };
@@ -48,7 +47,7 @@ const LogIn = ({ userData }) => {
           <Form.Control
             type="email"
             id="email"
-            placeholder="email"
+            placeholder="Email"
             required
             onChange={handleChange}
           />
@@ -59,7 +58,7 @@ const LogIn = ({ userData }) => {
           <Form.Control
             type="password"
             id="password"
-            placeholder="password"
+            placeholder="Password"
             required
             onChange={handleChange}
           />

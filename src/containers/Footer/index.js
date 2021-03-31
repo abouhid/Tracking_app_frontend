@@ -35,7 +35,7 @@ const Footer = () => {
       ></BottomNavigationAction>
       <BottomNavigationAction
         className="text-white"
-        label="Track.it"
+        label="Track"
         value="trackit"
         icon={
           <FontAwesomeIcon className="fa-2x text-white" icon={faChartLine} />

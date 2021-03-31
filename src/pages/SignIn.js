@@ -36,6 +36,7 @@ const SignIn = ({ userData }) => {
         userToken: data.data.auth_token,
         userInfo: jwt(data.data.auth_token).name,
       });
+
       history.push("/");
     }
   };
