@@ -7,7 +7,7 @@ import { logInUser } from "../api-requests";
 import { userData } from "../redux/actions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LogIn = ({ userData }) => {
   const [state, setState] = useState({
@@ -68,7 +68,7 @@ const LogIn = ({ userData }) => {
           Log in
         </Button>
         <Link to={{ pathname: "/signin" }}>
-          <p className="mt-4"> Dont have an account? Sign Up here!</p>
+          <p className="mt-4"> Don't have an account? Sign Up here!</p>
         </Link>
       </Form>
     </div>
