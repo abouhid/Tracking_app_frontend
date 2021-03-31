@@ -5,6 +5,9 @@ import jwt from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { logInUser } from "../api-requests";
 import { userData } from "../redux/actions";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { Link, Redirect } from "react-router-dom";
 
 const LogIn = ({ userData }) => {
   const [state, setState] = useState({
@@ -38,28 +41,36 @@ const LogIn = ({ userData }) => {
   };
 
   return (
-    <div className="LogIn">
-      <form>
-        <h1>Log In</h1>
-        <h2>Log in to your account!</h2>
-        <input
-          type="email"
-          id="email"
-          placeholder="email"
-          required
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="password"
-          required
-          onChange={handleChange}
-        />
-        <button type="submit" onClick={handleSubmit}>
-          Log In
-        </button>
-      </form>
+    <div className="LogIn d-flex">
+      <Form className="mb-5 align-self-center" onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            id="email"
+            placeholder="email"
+            required
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            id="password"
+            placeholder="password"
+            required
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button className="submit" type="submit">
+          Log in
+        </Button>
+        <Link to={{ pathname: "/signin" }}>
+          <p className="mt-4"> Dont have an account? Sign Up here!</p>
+        </Link>
+      </Form>
     </div>
   );
 };

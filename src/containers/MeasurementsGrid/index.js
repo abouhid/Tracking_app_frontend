@@ -30,7 +30,7 @@ const MeasurementsGrid = ({
         {dataInfo[0] ? (
           <>
             {dataInfo.map((el) => (
-              <MeasurementItem el={el} />
+              <MeasurementItem key={el.id} el={el} />
             ))}
           </>
         ) : (

@@ -3,10 +3,10 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import HomePage from "./HomePage";
 import MeasureItem from "../components/MeasureItem";
 import Clear from "@material-ui/icons/Clear";
 import { getMeasurements, removeMeasurement } from "../api-requests";
+import MainPage from "./MainPage";
 
 const MeasurementPage = ({
   isLoggedIn,
@@ -51,7 +51,7 @@ const MeasurementPage = ({
           />
         </>
       ) : (
-        <HomePage />
+        <MainPage />
       )}
     </div>
   );

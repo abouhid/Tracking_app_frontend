@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import HomePage from "./HomePage";
 import React from "react";
 import MeasurementsGrid from "../containers/MeasurementsGrid";
+import LogIn from "./LogIn";
 
 const MainPage = ({ isLoggedIn }) => {
   if (isLoggedIn) {
@@ -21,7 +21,7 @@ const MainPage = ({ isLoggedIn }) => {
       </div>
     );
   }
-  return <HomePage />;
+  return <LogIn />;
 };
 
 const mapStateToProps = (state) => ({
