@@ -1,10 +1,6 @@
 import React, { useReducer } from "react";
 import {
-  FormControl,
   Button,
-  InputLabel,
-  Input,
-  FormHelperText,
   Slide,
   FormControlLabel,
   Grid,

@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   measureStore: measureReducer,
 });
 
-const store = createStore(rootReducer);
+export const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Grid container direction="row" justify="center" alignItems="center">

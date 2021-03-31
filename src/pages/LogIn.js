@@ -43,7 +43,7 @@ const LogIn = ({ userData }) => {
   return (
     <div className="LogIn d-flex">
       <Form className="mb-5 align-self-center" onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -54,7 +54,7 @@ const LogIn = ({ userData }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"

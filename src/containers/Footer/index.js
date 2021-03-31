@@ -4,7 +4,6 @@ import "./index.css";
 import { BottomNavigationAction, BottomNavigation } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHome,
   faChartLine,
   faChartPie,
   faEllipsisH,

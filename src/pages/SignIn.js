@@ -43,7 +43,7 @@ const SignIn = ({ userData }) => {
   return (
     <div className="SignIn d-flex">
       <Form className="mb-5 align-self-center" onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -53,7 +53,7 @@ const SignIn = ({ userData }) => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="text"
@@ -64,7 +64,7 @@ const SignIn = ({ userData }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -75,7 +75,7 @@ const SignIn = ({ userData }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label>Password Confirmation</Form.Label>
           <Form.Control
             type="password"

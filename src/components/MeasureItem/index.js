@@ -13,7 +13,6 @@ const MeasureItem = ({
   userId,
 }) => {
   const currentData = dataInfo.find((el) => el.id == id);
-  const noMeasures = currentData.measures.length == 0;
 
   return (
     <Grid container>
