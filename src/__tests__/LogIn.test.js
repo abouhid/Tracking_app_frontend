@@ -1,24 +1,20 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 
-import { Router } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import store from "../redux/store";
 import Routes from "../routes";
-import Header from "../containers/Header";
-import { logInUser, signInUser } from "../api-requests";
-import { userData } from "../redux/actions";
-import jwt from "jwt-decode";
 import { createMemoryHistory } from "history";
 
-describe("Routes", () => {
-  it("Should render username ", async () => {
+describe("LogIn", () => {
+  it("Should not log in user that does not exist ", async () => {
     const history = createMemoryHistory();
 
     render(
       <Provider store={store}>
-        <Router history={history}>
+        <MemoryRouter initialEntries={["/login"]} initialIndex={1}>
           <Routes />
-        </Router>
+        </MemoryRouter>
       </Provider>
     );
     const emailField = screen.getByPlaceholderText("Email");
@@ -26,14 +22,13 @@ describe("Routes", () => {
     const submitButton = screen.getByText("Log in");
 
     fireEvent.change(emailField, {
-      target: { value: "alexandre.bouhid@engenharia.ufjf.br" },
+      target: { value: "random_email@email.com" },
     });
     fireEvent.change(passField, { target: { value: "123123" } });
     fireEvent.click(submitButton);
+
     await waitFor(() => {
-      expect(
-        screen.getByText(/Welcome Alexandre Queiroz Zamagna Bouhid/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Email address/i)).toBeInTheDocument();
     });
   });
 });

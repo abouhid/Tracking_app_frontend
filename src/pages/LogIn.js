@@ -28,6 +28,7 @@ const LogIn = ({ userData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await logInUser(state);
+    console.log("data returned from loggin in", data);
     if (data.statusText === "OK") {
       userData({
         isLoggedIn: true,

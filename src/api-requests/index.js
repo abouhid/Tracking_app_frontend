@@ -3,7 +3,8 @@ import axios from "axios";
 const URL = "http://localhost:3001";
 
 export const logInUser = async (data) => {
-  return axios({
+  console.log(data);
+  return await axios({
     url: `${URL}/auth/login`,
     data: JSON.stringify(data),
     method: "POST",
@@ -15,10 +16,10 @@ export const logInUser = async (data) => {
     .catch((err) => err);
 };
 
-export const signInUser = async (dataObj) => {
-  return axios({
+export const signInUser = async (data) => {
+  return await axios({
     url: `${URL}/signup`,
-    data: JSON.stringify(dataObj),
+    data: JSON.stringify(data),
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -76,10 +77,6 @@ export const removeMeasurement = async (
 ) => {
   await axios({
     url: `http://localhost:3001/measurements/${id}`,
-    data: {
-      name: "New one yo",
-      created_by: userId,
-    },
     method: "DELETE",
     headers: {
       Authorization: `Basic ${userToken}`,
