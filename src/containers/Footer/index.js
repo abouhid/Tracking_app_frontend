@@ -22,40 +22,32 @@ const Footer = () => {
       showLabels
       value={value}
       onChange={handleChange}
-      className="footer bg-dark "
+      className="footer bg-dark h-100 w-100"
     >
       <BottomNavigationAction
-        className="text-white"
+        className="p-1 text-white"
         label="Add Measure"
         value="addmeasure"
         onClick={() => console.log("test")}
-        icon={
-          <FontAwesomeIcon className="fa-2x text-white" icon={faChartBar} />
-        }
+        icon={<FontAwesomeIcon className="m-1 text-white" icon={faChartBar} />}
       ></BottomNavigationAction>
       <BottomNavigationAction
-        className="text-white"
+        className="p-1 text-white"
         label="Track"
         value="trackit"
-        icon={
-          <FontAwesomeIcon className="fa-2x text-white" icon={faChartLine} />
-        }
+        icon={<FontAwesomeIcon className="m-1 text-white" icon={faChartLine} />}
       />
       <BottomNavigationAction
-        className="text-white"
+        className="p-1 text-white"
         label="Your Progress"
         value="progress"
-        icon={
-          <FontAwesomeIcon className="fa-2x text-white" icon={faChartPie} />
-        }
+        icon={<FontAwesomeIcon className="m-1 text-white" icon={faChartPie} />}
       />
       <BottomNavigationAction
-        className="text-white"
+        className="p-1 text-white"
         label="More"
         value="more"
-        icon={
-          <FontAwesomeIcon className="fa-2x text-white" icon={faEllipsisH} />
-        }
+        icon={<FontAwesomeIcon className="m-1 text-white" icon={faEllipsisH} />}
       />
     </BottomNavigation>
   );

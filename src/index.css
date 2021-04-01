@@ -21,12 +21,12 @@ code {
 }
 
 .HomePage,
-.MainPage,
+.ProgressPage,
 .LogIn,
 .MeasurementPage,
 .SignIn {
   min-height: 75vh;
-  padding: 8%;
+  padding: 2% 8%;
 }
 
 .submit {

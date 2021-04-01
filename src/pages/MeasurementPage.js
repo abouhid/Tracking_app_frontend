@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
 import Clear from "@material-ui/icons/Clear";
 import { getMeasurements, removeMeasurement } from "../api-requests";
-import MainPage from "./MainPage";
+import ProgressPage from "./ProgressPage";
 import { Grid } from "@material-ui/core";
 
 const MeasurementPage = ({
@@ -40,9 +40,7 @@ const MeasurementPage = ({
             }}
           />
           <Link to="/">Home</Link>
-          <div className="d-flex justify-content-center mt-3 font-weight-bold">
-            123
-          </div>
+          <div className="d-flex justify-content-center mt-3 font-weight-bold"></div>
           <MeasureItem
             id={id}
             userI={userId}
@@ -54,7 +52,7 @@ const MeasurementPage = ({
           />
         </>
       ) : (
-        <MainPage />
+        <ProgressPage />
       )}
     </div>
   );

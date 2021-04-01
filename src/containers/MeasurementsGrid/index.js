@@ -15,17 +15,11 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
   }, [fetchRequested]);
   return (
     <>
-      <Typography>{userInfo}'s Measurements:</Typography>
+      <Typography className="text-center py-3">
+        {userInfo}'s Measurements:
+      </Typography>
 
-      <Grid
-        container
-        item
-        xs={12}
-        spacing={3}
-        wrap="no-wrap"
-        alignItems="center"
-        m={0}
-      >
+      <Grid container item xs={12} spacing={3} alignItems="center" m={0}>
         {dataInfo[0] ? (
           <>
             {dataInfo.map((el) => (

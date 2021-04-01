@@ -4,7 +4,7 @@ import React from "react";
 import MeasurementsGrid from "../containers/MeasurementsGrid";
 import LogIn from "./LogIn";
 
-const MainPage = ({ isLoggedIn }) => {
+const ProgressPage = ({ isLoggedIn }) => {
   if (isLoggedIn) {
     const todaysDate = new Date();
     const result = todaysDate.toUTCString().split(" ");
@@ -12,7 +12,7 @@ const MainPage = ({ isLoggedIn }) => {
     const finalValue = result.join(" ");
 
     return (
-      <div className="MainPage">
+      <div className="ProgressPage">
         <div className="d-flex justify-content-center mt-3 font-weight-bold">
           {finalValue}
         </div>
@@ -28,8 +28,8 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.userStore.isLoggedIn,
 });
 
-MainPage.propTypes = {
+ProgressPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps)(MainPage);
+export default connect(mapStateToProps)(ProgressPage);
