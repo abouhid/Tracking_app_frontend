@@ -25,7 +25,8 @@ code {
 .LogIn,
 .MeasurementPage,
 .SignIn {
-  height: 75vh;
+  min-height: 75vh;
+  padding: 8%;
 }
 
 .submit {

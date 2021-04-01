@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasurementItem from "../MeasurementItem";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { measureData } from "../../redux/actions";
 import { getMeasurements } from "../../api-requests";
 import SubmitForm from "../../components/SubmitForm";
@@ -15,9 +15,17 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
   }, [fetchRequested]);
   return (
     <>
-      <h1>Welcome {userInfo}!</h1>
+      <Typography>{userInfo}'s Measurements:</Typography>
 
-      <Grid container>
+      <Grid
+        container
+        item
+        xs={12}
+        spacing={3}
+        wrap="no-wrap"
+        alignItems="center"
+        m={0}
+      >
         {dataInfo[0] ? (
           <>
             {dataInfo.map((el) => (

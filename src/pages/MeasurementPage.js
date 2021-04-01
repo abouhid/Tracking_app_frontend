@@ -7,6 +7,7 @@ import MeasureItem from "../components/MeasureItem";
 import Clear from "@material-ui/icons/Clear";
 import { getMeasurements, removeMeasurement } from "../api-requests";
 import MainPage from "./MainPage";
+import { Grid } from "@material-ui/core";
 
 const MeasurementPage = ({
   isLoggedIn,
@@ -23,7 +24,7 @@ const MeasurementPage = ({
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
   return (
-    <div className="LogIn">
+    <div className="p-3">
       {isLoggedIn ? (
         <>
           <Clear
@@ -39,7 +40,9 @@ const MeasurementPage = ({
             }}
           />
           <Link to="/">Home</Link>
-          <div className="d-flex justify-content-center mt-3 font-weight-bold"></div>
+          <div className="d-flex justify-content-center mt-3 font-weight-bold">
+            123
+          </div>
           <MeasureItem
             id={id}
             userI={userId}
