@@ -54,8 +54,8 @@ const MeasureItem = ({
       <span>
         {diffArr[idx] ? (
           <>
-            {diffArr[idx] >= 0 ? <TrendingUp /> : <TrendingDown />}
-            {`${diffArr[idx]} cm`}
+            <span>{diffArr[idx] >= 0 ? <TrendingUp /> : <TrendingDown />}</span>
+            <span className="ml-1 mr-4">{`${diffArr[idx]}cm`}</span>
           </>
         ) : (
           <></>
@@ -77,8 +77,8 @@ const MeasureItem = ({
                     secondary={`${value.value_of_measure} cm`}
                   />
 
+                  {showProgress(idx)}
                   <div className="d-flex flex-column align-items-end">
-                    {showProgress(idx)}
                     {editIcon(value)}
                     {deleteIcon(value)}
                   </div>

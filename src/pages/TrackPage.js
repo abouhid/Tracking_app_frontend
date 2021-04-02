@@ -4,9 +4,9 @@ import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
-import Clear from "@material-ui/icons/Clear";
 import { getMeasurements, removeMeasurement } from "../api-requests";
 import SubmitForm from "../components/SubmitForm";
+import { Modal, Button } from "react-bootstrap";
 
 const TrackPage = ({
   isLoggedIn,
@@ -15,6 +15,10 @@ const TrackPage = ({
   userToken,
   userId,
 }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
   const history = useHistory();
@@ -28,19 +32,6 @@ const TrackPage = ({
     <div className="TrackPage w-100">
       {isLoggedIn ? (
         <>
-          {/* <Clear
-            onClick={async () => {
-              await removeMeasurement(
-                id,
-                userToken,
-                userId,
-                fetchRequested,
-                setFetchRequested
-              );
-              history.push(`/`);
-            }}
-          /> */}
-
           <SubmitForm
             userToken={userToken}
             value={id}
@@ -58,6 +49,38 @@ const TrackPage = ({
             userToken={userToken}
             isLoggedIn={isLoggedIn}
           />
+          <Button variant="danger" onClick={handleShow}>
+            Delete Measurement
+          </Button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Woohoo, you're reading this text in a modal!
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                onClick={async () => {
+                  handleClose();
+                  await removeMeasurement(
+                    id,
+                    userToken,
+                    userId,
+                    fetchRequested,
+                    setFetchRequested
+                  );
+                  history.push(`/`);
+                }}
+              >
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
       ) : (
         <Redirect to="/" />
