@@ -89,14 +89,12 @@ const MeasurementPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
 const mapStateToProps = (state) => ({
   isLoggedIn: state.userStore.isLoggedIn,
   userToken: state.userStore.userToken,
-  userInfo: state.userStore.userInfo,
   dataInfo: state.measureStore.dataInfo,
 });
 
 MeasurementPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   userToken: PropTypes.string.isRequired,
-  userInfo: PropTypes.string.isRequired,
   dataInfo: PropTypes.array.isRequired,
 };
 

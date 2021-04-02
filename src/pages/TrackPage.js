@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
-import { getMeasurements, removeMeasurement } from "../api-requests";
+import { getMeasurements } from "../api-requests";
 
 const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
-  const history = useHistory();
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);

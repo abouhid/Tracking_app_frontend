@@ -3,7 +3,6 @@ import axios from "axios";
 const URL = "http://localhost:3001";
 
 export const logInUser = async (data) => {
-  console.log(data);
   return await axios({
     url: `${URL}/auth/login`,
     data: JSON.stringify(data),

@@ -85,7 +85,14 @@ function Header({ isLoggedIn }) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    history.push("/profile");
+                  }}
+                >
+                  Profile
+                </MenuItem>
               </Menu>
             </div>
           )}

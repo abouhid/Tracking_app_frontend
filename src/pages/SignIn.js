@@ -30,7 +30,6 @@ const SignIn = ({ userData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await signInUser(signIn);
-    console.log("data returned from signin in", data);
     if (data.statusText === "Created") {
       userData({
         isLoggedIn: true,

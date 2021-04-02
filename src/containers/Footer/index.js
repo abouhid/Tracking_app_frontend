@@ -30,7 +30,9 @@ const Footer = () => {
         className="p-1 text-white"
         label="Add Measure"
         value="addmeasure"
-        onClick={() => console.log("test")}
+        onClick={() => {
+          history.push("/");
+        }}
         icon={<FontAwesomeIcon className="m-1 text-white" icon={faChartBar} />}
       ></BottomNavigationAction>
       <BottomNavigationAction
@@ -55,6 +57,9 @@ const Footer = () => {
         className="p-1 text-white"
         label="More"
         value="more"
+        onClick={() => {
+          history.push("/profile");
+        }}
         icon={<FontAwesomeIcon className="m-1 text-white" icon={faEllipsisH} />}
       />
     </BottomNavigation>

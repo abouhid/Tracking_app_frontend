@@ -7,6 +7,7 @@ import ProgressPage from "../pages/ProgressPage";
 import MeasurementPage from "../pages/MeasurementPage";
 import SigIn from "../pages/SignIn";
 import TrackPage from "../pages/TrackPage";
+import UserPage from "../pages/UserPage";
 
 const Routes = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ const Routes = () => (
       <Route exact path="/measurements" component={TrackPage} />
 
       <Route exact path="/measurements/:id" component={MeasurementPage} />
+      <Route exact path="/profile" component={UserPage} />
     </Switch>
     <Footer />
   </BrowserRouter>
