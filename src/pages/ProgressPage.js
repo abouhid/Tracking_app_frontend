@@ -12,7 +12,7 @@ const ProgressPage = ({ isLoggedIn }) => {
     const finalValue = result.join(" ");
 
     return (
-      <div className="ProgressPage">
+      <div className="Page py-3">
         <div className="d-flex justify-content-center mt-3 font-weight-bold">
           {finalValue}
         </div>

@@ -1,11 +1,5 @@
 import React, { useReducer } from "react";
-import {
-  Button,
-  Slide,
-  FormControlLabel,
-  Grid,
-  TextField,
-} from "@material-ui/core";
+import { Button, Slide, FormControlLabel, TextField } from "@material-ui/core";
 import { updateMeasure, addMeasure, addMeasurement } from "../../api-requests";
 import Edit from "@material-ui/icons/Edit";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";

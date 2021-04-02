@@ -5,7 +5,6 @@ import {
   Box,
   ListItem,
   List,
-  ListSubheader,
   ListItemText,
   Collapse,
 } from "@material-ui/core";

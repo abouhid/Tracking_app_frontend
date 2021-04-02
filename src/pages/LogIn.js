@@ -41,7 +41,7 @@ const LogIn = ({ userData }) => {
   };
 
   return (
-    <div className="LogIn d-flex">
+    <div className="Page d-flex">
       <Form className="mb-5 align-self-center" onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Email address</Form.Label>

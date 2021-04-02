@@ -4,8 +4,9 @@ import Footer from "../containers/Footer";
 import Header from "../containers/Header";
 import LogIn from "../pages/LogIn";
 import ProgressPage from "../pages/ProgressPage";
-import TrackPage from "../pages/TrackPage";
+import MeasurementPage from "../pages/MeasurementPage";
 import SigIn from "../pages/SignIn";
+import TrackPage from "../pages/TrackPage";
 
 const Routes = () => (
   <BrowserRouter>
@@ -14,7 +15,9 @@ const Routes = () => (
       <Route exact path="/" component={ProgressPage} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/signin" component={SigIn} />
-      <Route exact path="/measurements/:id" component={TrackPage} />
+      <Route exact path="/measurements" component={TrackPage} />
+
+      <Route exact path="/measurements/:id" component={MeasurementPage} />
     </Switch>
     <Footer />
   </BrowserRouter>

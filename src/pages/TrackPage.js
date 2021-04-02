@@ -5,20 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
 import { getMeasurements, removeMeasurement } from "../api-requests";
-import SubmitForm from "../components/SubmitForm";
-import { Modal, Button } from "react-bootstrap";
 
-const TrackPage = ({
-  isLoggedIn,
-  dataInfo,
-  measureData,
-  userToken,
-  userId,
-}) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
   const history = useHistory();
@@ -26,61 +14,36 @@ const TrackPage = ({
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
 
-  const measurementInfo = dataInfo.find((el) => el.id == id);
-
   return (
-    <div className="TrackPage w-100">
+    <div className="Page w-100 Page">
       {isLoggedIn ? (
         <>
-          <SubmitForm
-            userToken={userToken}
-            value={id}
-            setFetchRequested={setFetchRequested}
-            fetchRequested={fetchRequested}
-            formType={"ADD"}
-          />
-          <MeasureItem
-            id={id}
-            userI={userId}
-            fetchRequested={fetchRequested}
-            setFetchRequested={setFetchRequested}
-            item={measurementInfo}
-            measureData={measureData}
-            userToken={userToken}
-            isLoggedIn={isLoggedIn}
-          />
-          <Button variant="danger" onClick={handleShow}>
-            Delete Measurement
-          </Button>
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              Woohoo, you're reading this text in a modal!
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button
-                variant="primary"
-                onClick={async () => {
-                  handleClose();
-                  await removeMeasurement(
-                    id,
-                    userToken,
-                    userId,
-                    fetchRequested,
-                    setFetchRequested
-                  );
-                  history.push(`/`);
-                }}
-              >
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <h3 className="my-4 text-center">All Your Tracks</h3>
+
+          {dataInfo.map((item) => {
+            return (
+              <div key={item.id}>
+                {item.measures.length > 0 ? (
+                  <h4 className="my-4 text-center">
+                    Your <span style={{ color: "#62b5e5" }}>{item.name}</span>{" "}
+                    's Progress
+                  </h4>
+                ) : (
+                  <></>
+                )}
+
+                <MeasureItem
+                  id={id}
+                  fetchRequested={fetchRequested}
+                  setFetchRequested={setFetchRequested}
+                  item={item}
+                  measureData={measureData}
+                  userToken={userToken}
+                  isLoggedIn={isLoggedIn}
+                />
+              </div>
+            );
+          })}
         </>
       ) : (
         <Redirect to="/" />
@@ -93,7 +56,6 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.userStore.isLoggedIn,
   userToken: state.userStore.userToken,
   userInfo: state.userStore.userInfo,
-  userId: state.userStore.userId,
   dataInfo: state.measureStore.dataInfo,
 });
 
@@ -101,7 +63,6 @@ TrackPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   userToken: PropTypes.string.isRequired,
   userInfo: PropTypes.string.isRequired,
-  userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dataInfo: PropTypes.array.isRequired,
 };
 

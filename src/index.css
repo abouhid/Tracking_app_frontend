@@ -20,13 +20,10 @@ code {
   margin-top: 5vh;
 }
 
-.HomePage,
-.ProgressPage,
-.LogIn,
-.TrackPage,
-.SignIn {
+.Page {
   min-height: 75vh;
   padding: 2% 8%;
+  margin: 2% 0;
 }
 
 .submit {
