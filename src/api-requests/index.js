@@ -91,15 +91,15 @@ export const removeMeasurement = async (
 };
 
 export const addMeasure = async (
-  data,
+  id,
   userToken,
   setFetchRequested,
   fetchRequested,
   inputValue
 ) => {
   await axios({
-    url: `http://localhost:3001/measurements/${data.id}/measures`,
-    data: { value_of_measure: inputValue, measurement_id: data.id },
+    url: `http://localhost:3001/measurements/${id}/measures`,
+    data: { value_of_measure: inputValue, measurement_id: id },
     method: "POST",
     headers: {
       Authorization: `Basic ${userToken}`,

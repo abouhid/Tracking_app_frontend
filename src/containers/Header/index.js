@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import Home from "@material-ui/icons/Home";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { measureData } from "../../redux/actions";
 import PropTypes from "prop-types";
 import "./index.css";
+import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Header({ isLoggedIn }) {
+  const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -48,7 +50,11 @@ function Header({ isLoggedIn }) {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon />
+            <Home
+              onClick={() => {
+                history.push(`/`);
+              }}
+            />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Track.it

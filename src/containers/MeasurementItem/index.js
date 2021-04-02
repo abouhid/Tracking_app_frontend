@@ -36,7 +36,7 @@ const MeasurementItem = ({ el }) => {
           className="name"
           onClick={() => history.push(`/measurements/${el.id}`)}
         >
-          <div className="d-flex ">
+          <div className="d-flex justify-content-around">
             <FitnessCenter />
             <span>{el.name}</span>
           </div>

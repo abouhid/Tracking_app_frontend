@@ -15,7 +15,7 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
   }, [fetchRequested]);
   return (
     <>
-      <Typography className="text-center py-3">
+      <Typography className="text-center py-4">
         {userInfo}'s Measurements:
       </Typography>
 

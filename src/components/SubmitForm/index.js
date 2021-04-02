@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { updateMeasure, addMeasure, addMeasurement } from "../../api-requests";
 import Edit from "@material-ui/icons/Edit";
-import Add from "@material-ui/icons/Add";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { Icon } from "@material-ui/core";
 
 const SubmitForm = ({
@@ -70,14 +70,18 @@ const SubmitForm = ({
   };
 
   return (
-    <Grid item>
+    <>
       <FormControlLabel
+        style={{ margin: "0px" }}
         control={
           <>
             {editForm ? (
               <Edit onClick={() => setChecked(!checked)} />
             ) : (
-              <Add onClick={() => setChecked(!checked)} />
+              <AddCircleOutlineIcon
+                style={{ color: "#43b5e8", fontSize: "50px" }}
+                onClick={() => setChecked(!checked)}
+              />
             )}
           </>
         }
@@ -95,13 +99,17 @@ const SubmitForm = ({
             required={true}
           />
 
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ color: "#43b5e8" }}
+          >
             {measurementForm ? formType : buttonText + " Measure"}
             <Icon>send</Icon>
           </Button>
         </form>
       </Slide>
-    </Grid>
+    </>
   );
 };
 

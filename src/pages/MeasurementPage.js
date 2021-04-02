@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
 import Clear from "@material-ui/icons/Clear";
 import { getMeasurements, removeMeasurement } from "../api-requests";
-import ProgressPage from "./ProgressPage";
-import { Grid } from "@material-ui/core";
+import SubmitForm from "../components/SubmitForm";
 
 const MeasurementPage = ({
   isLoggedIn,
@@ -19,15 +18,17 @@ const MeasurementPage = ({
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
   const history = useHistory();
-
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
+
+  const measurementInfo = dataInfo.find((el) => el.id == id);
+
   return (
-    <div className="p-3">
+    <div className="MeasurementPage w-100">
       {isLoggedIn ? (
         <>
-          <Clear
+          {/* <Clear
             onClick={async () => {
               await removeMeasurement(
                 id,
@@ -38,21 +39,28 @@ const MeasurementPage = ({
               );
               history.push(`/`);
             }}
+          /> */}
+
+          <SubmitForm
+            userToken={userToken}
+            value={id}
+            setFetchRequested={setFetchRequested}
+            fetchRequested={fetchRequested}
+            formType={"ADD"}
           />
-          <Link to="/">Home</Link>
-          <div className="d-flex justify-content-center mt-3 font-weight-bold"></div>
           <MeasureItem
             id={id}
             userI={userId}
             fetchRequested={fetchRequested}
             setFetchRequested={setFetchRequested}
-            dataInfo={dataInfo}
+            item={measurementInfo}
             measureData={measureData}
             userToken={userToken}
+            isLoggedIn={isLoggedIn}
           />
         </>
       ) : (
-        <ProgressPage />
+        <Redirect to="/" />
       )}
     </div>
   );
