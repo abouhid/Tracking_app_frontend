@@ -8,7 +8,7 @@ import Clear from "@material-ui/icons/Clear";
 import { getMeasurements, removeMeasurement } from "../api-requests";
 import SubmitForm from "../components/SubmitForm";
 
-const MeasurementPage = ({
+const TrackPage = ({
   isLoggedIn,
   dataInfo,
   measureData,
@@ -25,7 +25,7 @@ const MeasurementPage = ({
   const measurementInfo = dataInfo.find((el) => el.id == id);
 
   return (
-    <div className="MeasurementPage w-100">
+    <div className="TrackPage w-100">
       {isLoggedIn ? (
         <>
           {/* <Clear
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => ({
   dataInfo: state.measureStore.dataInfo,
 });
 
-MeasurementPage.propTypes = {
+TrackPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   userToken: PropTypes.string.isRequired,
   userInfo: PropTypes.string.isRequired,
@@ -86,4 +86,4 @@ const mapDispatch = {
   measureData,
 };
 
-export default connect(mapStateToProps, mapDispatch)(MeasurementPage);
+export default connect(mapStateToProps, mapDispatch)(TrackPage);

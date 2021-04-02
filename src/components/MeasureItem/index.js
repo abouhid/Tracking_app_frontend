@@ -43,11 +43,11 @@ const MeasureItem = ({
   );
   let measureArr = item.measures.map((item) => parseInt(item.value_of_measure));
   let diffArr = [];
-  for (let i = measureArr.length; i > 0; i--) {
-    diffArr.unshift(measureArr[i - 1] - measureArr[i]);
+  let reversedArr = [];
+  for (let i = 0; i < measureArr.length; i++) {
+    diffArr.unshift(measureArr[i] - measureArr[i - 1]);
+    reversedArr.unshift(item.measures[i]);
   }
-  console.log(diffArr);
-  console.log(diffArr);
 
   const showProgress = (idx) => {
     return (
@@ -66,7 +66,7 @@ const MeasureItem = ({
 
   return (
     <>
-      {item.measures.map((value, idx) => {
+      {reversedArr.map((value, idx) => {
         return (
           <Grid key={value.id} item className="my-3">
             <Paper elevation={3}>

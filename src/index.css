@@ -23,7 +23,7 @@ code {
 .HomePage,
 .ProgressPage,
 .LogIn,
-.MeasurementPage,
+.TrackPage,
 .SignIn {
   min-height: 75vh;
   padding: 2% 8%;
