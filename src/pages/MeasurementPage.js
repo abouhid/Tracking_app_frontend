@@ -52,17 +52,19 @@ const MeasurementPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
           </Button>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>
+                Warning: deleting this Measurement will be permanent!
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              Woohoo, you're reading this text in a modal!
+              Are you sure you want to delete this measurement?
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
               <Button
-                variant="primary"
+                variant="danger"
                 onClick={async () => {
                   handleClose();
                   await removeMeasurement(
@@ -74,7 +76,7 @@ const MeasurementPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
                   history.push(`/`);
                 }}
               >
-                Save Changes
+                Delete Measurement
               </Button>
             </Modal.Footer>
           </Modal>

@@ -10,11 +10,11 @@ import "./index.css";
 
 ReactDOM.render(
   <Grid container direction="row" justify="center" alignItems="center">
-    <Grid item md={3}></Grid>
+    <Grid item md={2}></Grid>
     <Grid
-      sm={6}
-      md={6}
-      lg={4}
+      sm={8}
+      md={8}
+      lg={6}
       container
       direction="column"
       justify="center"
@@ -28,7 +28,7 @@ ReactDOM.render(
       </Provider>
     </Grid>
 
-    <Grid item md={3}></Grid>
+    <Grid item md={2}></Grid>
   </Grid>,
   document.getElementById("root")
 );
