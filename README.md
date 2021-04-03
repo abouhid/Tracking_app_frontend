@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+![](https://img.shields.io/badge/Microverse-blueviolet)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=abouhid/https://github.com/abouhid/Tracking_app_frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Track.it
 
-## Available Scripts
+This is the Final Capstone Project for the Microverse Program, with the following requirements:
 
-In the project directory, you can run:
+- The project is a mobile web app
+- The database should has at least 2 tables (Measures and Measurements)
+- It uses Postgres as a database
+- Ruby on Rails was used for the back-end and to create a REST API
+- React was used for the front-end and uses redux to store the info across the app
+- The project is deployed accessible online
 
-### `yarn start`
+![screenshot](./src/images/img1.png)
+![screenshot](./src/images/img2.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The projects consists of a tracking-app used to measure your progress on a diet/workout routine. You are able to:
 
-### `yarn test`
+- Sign in and Log in as a new user;
+- Set your measures for the 6 default Measurements;
+- Create a new set of Measurements as well as deleting any of them.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Live Demo
 
-### `yarn build`
+[Live Demo Link](https://trackappalex.netlify.app/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Built With
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React & Redux / React-Bootstrap / Material UI
+- Javascript
+- Ruby on Rails
+- Axios
+- JWT
+- HTML / CSS
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
 
-### `yarn eject`
+To get a local copy up and running follow these simple example steps.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Git clone git@github.com:abouhid/Tracking_app_frontend.git
+- Move to the root directory in your command line
+- run `npm install`
+- run `npm start`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To get the back-end running locally you will need to change the URL variable in src/api-requests/index.js to the back-end server URL generated.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Authors
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+👤 **Alexandre Bouhid**
 
-## Learn More
+- Github: [@abouhid](https://github.com/abouhid)
+- LinkedIn: [Alexandre Bouhid](https://www.linkedin.com/in/alexandrebouhid/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🤝 Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions, issues and feature requests are welcome!
 
-### Code Splitting
+## Show your support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Give a ⭐️ if you like this project!
 
-### Analyzing the Bundle Size
+## 📝 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is [MIT](lic.url) licensed.
