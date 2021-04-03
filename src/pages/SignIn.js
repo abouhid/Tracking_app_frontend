@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import jwt from "jwt-decode";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { signInUser } from "../api-requests";
+import { saveToken, signInUser } from "../api-requests";
 import { userData } from "../redux/actions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -31,6 +31,7 @@ const SignIn = ({ userData }) => {
     e.preventDefault();
     const data = await signInUser(signIn);
     if (data.statusText === "Created") {
+      saveToken(data.data.auth_token);
       userData({
         isLoggedIn: true,
         userToken: data.data.auth_token,

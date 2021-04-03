@@ -9,10 +9,12 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { connect } from "react-redux";
-import { measureData } from "../../redux/actions";
+import { userData } from "../../redux/actions";
 import PropTypes from "prop-types";
 import "./index.css";
+
 import { useHistory } from "react-router";
+import { signOut } from "../../api-requests";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, userData }) {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -93,6 +95,14 @@ function Header({ isLoggedIn }) {
                 >
                   Profile
                 </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    signOut(history, userData);
+                    history.push("/");
+                  }}
+                >
+                  SignOut
+                </MenuItem>
               </Menu>
             </div>
           )}
@@ -111,7 +121,7 @@ Header.propTypes = {
 };
 
 const mapDispatch = {
-  measureData,
+  userData,
 };
 
 export default connect(mapStateToProps, mapDispatch)(Header);
