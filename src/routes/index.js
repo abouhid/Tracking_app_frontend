@@ -8,6 +8,7 @@ import MeasurementPage from "../pages/MeasurementPage";
 import SigIn from "../pages/SignIn";
 import TrackPage from "../pages/TrackPage";
 import UserPage from "../pages/UserPage";
+import AddPage from "../pages/AddPage";
 
 const Routes = () => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ const Routes = () => (
 
       <Route exact path="/measurements/:id" component={MeasurementPage} />
       <Route exact path="/profile" component={UserPage} />
+      <Route exact path="/new" component={AddPage} />
     </Switch>
     <Footer />
   </BrowserRouter>

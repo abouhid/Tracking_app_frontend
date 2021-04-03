@@ -31,7 +31,7 @@ const Footer = () => {
         label="Add Measure"
         value="addmeasure"
         onClick={() => {
-          history.push("/");
+          history.push("/new");
         }}
         icon={<FontAwesomeIcon className="m-1 text-white" icon={faChartBar} />}
       ></BottomNavigationAction>

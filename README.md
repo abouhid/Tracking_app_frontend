@@ -6,11 +6,12 @@
 This is the Final Capstone Project for the Microverse Program, with the following requirements:
 
 - The project is a mobile web app
-- The database should has at least 2 tables (Measures and Measurements)
+- The database 2 tables (Measures and Measurements)
 - It uses Postgres as a database
 - Ruby on Rails was used for the back-end and to create a REST API
 - React was used for the front-end and uses redux to store the info across the app
 - The project is deployed accessible online
+- Implemented 2 nice-to-have requirements: user authentication from the front-end to the server and a panel to create / update / delete things to measure;
 
 ![screenshot](./src/images/img1.png)
 ![screenshot](./src/images/img2.png)
