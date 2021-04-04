@@ -27,6 +27,7 @@ const LogIn = ({ userData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = await logInUser(state);
     if (data.statusText === "OK") {
       saveToken(data.data.auth_token);

@@ -43,7 +43,6 @@ const AddPage = ({
       );
     });
   };
-  console.log("aa", finalValue);
   return (
     <div className="Page">
       {isLoggedIn ? (

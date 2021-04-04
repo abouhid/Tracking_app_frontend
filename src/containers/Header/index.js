@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Home from "@material-ui/icons/Home";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { connect } from "react-redux";
@@ -51,12 +51,11 @@ function Header({ isLoggedIn, userData }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={() => {
+              history.push(`/`);
+            }}
           >
-            <Home
-              onClick={() => {
-                history.push(`/`);
-              }}
-            />
+            <Home />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Track.it
@@ -67,43 +66,14 @@ function Header({ isLoggedIn, userData }) {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleMenu}
+                onClick={() => {
+                  signOut(history, userData);
+                  history.push("/");
+                }}
                 color="inherit"
               >
-                <AccountCircle />
+                <ExitToApp />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    history.push("/profile");
-                  }}
-                >
-                  Profile
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    signOut(history, userData);
-                    history.push("/");
-                  }}
-                >
-                  SignOut
-                </MenuItem>
-              </Menu>
             </div>
           )}
         </Toolbar>

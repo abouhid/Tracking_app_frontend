@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// const URL = "http://tracking-app-alex.herokuapp.com";
 const URL = "http://localhost:3001";
 
 export const logInUser = async (data) => {
@@ -12,7 +13,7 @@ export const logInUser = async (data) => {
     },
   })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => console.log(err));
 };
 
 export const signInUser = async (data) => {
