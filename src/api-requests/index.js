@@ -13,7 +13,7 @@ export const logInUser = async (data) => {
     },
   })
     .then((res) => res)
-    .catch((err) => console.log(err));
+    .catch((err) => err);
 };
 
 export const signInUser = async (data) => {

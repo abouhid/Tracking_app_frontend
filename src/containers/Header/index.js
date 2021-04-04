@@ -6,8 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Home from "@material-ui/icons/Home";
 import ExitToApp from "@material-ui/icons/ExitToApp";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+
 import { connect } from "react-redux";
 import { userData } from "../../redux/actions";
 import PropTypes from "prop-types";
@@ -31,16 +30,6 @@ const useStyles = makeStyles((theme) => ({
 function Header({ isLoggedIn, userData }) {
   const history = useHistory();
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <div className={classes.root}>

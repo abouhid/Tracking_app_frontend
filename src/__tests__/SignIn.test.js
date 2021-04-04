@@ -1,18 +1,26 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from "react-router-dom";
 import store from "../redux/store";
 import Routes from "../routes";
-import { logInUser, saveToken } from "../api-requests";
 import { userData } from "../redux/actions";
-import jwt from "jwt-decode";
+import { signInUser } from "../api-requests";
 
 const num = Math.floor(Math.random() * 5000);
-// const random_name = num.toString();
-// const random_email = num.toString() + "@gmail.com";
-// const userPassword = "123123";
+const random_name = num.toString();
+const random_email = num.toString() + "@gmail.com";
+const userPassword = "123123";
+
+const clearStorage = () => {
+  localStorage.clear("tokenObj");
+  userData({
+    isLoggedIn: false,
+    userToken: "",
+    userInfo: "",
+    userId: "",
+  });
+};
 describe("SignIn", () => {
   it("Should sign in user ", async () => {
     render(
@@ -22,40 +30,52 @@ describe("SignIn", () => {
         </MemoryRouter>
       </Provider>
     );
+    clearStorage();
 
-    const random_name = "test2";
-    const random_email = "test2@gmail.com";
-    const userPassword = "123123";
+    // const random_name = "test3";
+    // const random_email = "test3@gmail.com";
+    // const userPassword = "123123";
+
+    const data = await signInUser({
+      name: random_name,
+      email: random_email,
+      password: userPassword,
+      password_confirmation: userPassword,
+    });
+
+    if (data && data.statusText === "OK") {
+      saveToken(data.data.auth_token);
+      userData({
+        isLoggedIn: true,
+        userToken: data.data.auth_token,
+        userInfo: jwt(data.data.auth_token).name,
+        userId: jwt(data.data.auth_token).user_id,
+      });
+    }
+
     // fireEvent.click(screen.getByText("Don't have an account? Sign Up here!"));
 
-    // const usernameField = screen.getByPlaceholderText("Username");
-    // const emailField = screen.getByPlaceholderText("Email");
-    // const passField = screen.getByPlaceholderText("Password");
-    // const passConfField = screen.getByPlaceholderText("Password Confirmation");
+    // fireEvent.change(screen.getByPlaceholderText("Username"), {
+    //   target: { value: random_name },
+    // });
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: random_email },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: userPassword },
+    });
 
-    // fireEvent.change(usernameField, { target: { value: random_name } });
-    // fireEvent.change(emailField, { target: { value: random_email } });
-    // fireEvent.change(passField, { target: { value: userPassword } });
-    // fireEvent.change(passConfField, { target: { value: userPassword } });
+    // fireEvent.change(screen.getByPlaceholderText("Password Confirmation"), {
+    //   target: { value: userPassword },
+    // });
 
     // const submitButton = screen.getByText("Sign in");
     // fireEvent.click(submitButton);
 
-    // const el = screen.getByText("Already have an account? Log In here!");
-
-    // const data = await logInUser({
-    //   email: random_email,
-    //   password: userPassword,
-    // });
-    // if (data.statusText === "OK") {
-    //   saveToken(data.data.auth_token);
-    //   userData({
-    //     isLoggedIn: true,
-    //     userToken: data.data.auth_token,
-    //     userInfo: jwt(data.data.auth_token).name,
-    //     userId: jwt(data.data.auth_token).user_id,
-    //   });
-    // }
+    // const changePage = screen.getByText(
+    //   "Already have an account? Log In here!"
+    // );
+    // fireEvent.click(changePage);
 
     const submitButtonLogIn = screen.getByText("Log in");
     fireEvent.change(screen.getByPlaceholderText("Email"), {
@@ -69,10 +89,6 @@ describe("SignIn", () => {
       expect(
         screen.getByText(`${random_name}'s Measurements:`)
       ).toBeInTheDocument();
-
-      // expect(
-      //   screen.getByText("Don't have an account? Sign Up here!")
-      // ).toBeInTheDocument();
     });
   });
   // //  await waitFor( () => {
