@@ -6,7 +6,7 @@
 This is the Final Capstone Project for the Microverse Program, with the following requirements:
 
 - The project is a mobile web app
-- The database 2 tables (Measures and Measurements)
+- The database has 2 tables (Measures and Measurements)
 - It uses Postgres as a database
 - Ruby on Rails was used for the back-end and to create a REST API
 - React was used for the front-end and uses redux to store the info across the app
@@ -48,7 +48,7 @@ To get a local copy up and running follow these simple example steps.
 
 To get the back-end running locally you will need to change the URL variable in src/api-requests/index.js to the back-end server URL generated.
 
-## Authors
+## Author
 
 👤 **Alexandre Bouhid**
 
