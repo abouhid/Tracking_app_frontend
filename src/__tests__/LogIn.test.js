@@ -29,26 +29,9 @@ describe("LogIn", () => {
     );
     clearStorage();
 
-    const random_name = "test2";
-    const random_email = "test2@gmail.com";
+    const random_name = "test";
+    const random_email = "test@gmail.com";
     const userPassword = "123123";
-
-    const signInData = await signInUser({
-      name: random_name,
-      email: random_email,
-      password: userPassword,
-      password_confirmation: userPassword,
-    });
-
-    if (signInData && signInData.statusText === "OK") {
-      saveToken(signInData.data.auth_token);
-      userData({
-        isLoggedIn: true,
-        userToken: signInData.data.auth_token,
-        userInfo: jwt(signInData.data.auth_token).name,
-        userId: jwt(signInData.data.auth_token).user_id,
-      });
-    }
 
     const data = await logInUser({
       email: random_email,

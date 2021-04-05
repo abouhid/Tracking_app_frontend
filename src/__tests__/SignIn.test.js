@@ -32,10 +32,6 @@ describe("SignIn", () => {
     );
     clearStorage();
 
-    // const random_name = "test3";
-    // const random_email = "test3@gmail.com";
-    // const userPassword = "123123";
-
     const data = await signInUser({
       name: random_name,
       email: random_email,
@@ -53,29 +49,12 @@ describe("SignIn", () => {
       });
     }
 
-    // fireEvent.click(screen.getByText("Don't have an account? Sign Up here!"));
-
-    // fireEvent.change(screen.getByPlaceholderText("Username"), {
-    //   target: { value: random_name },
-    // });
     fireEvent.change(screen.getByPlaceholderText("Email"), {
       target: { value: random_email },
     });
     fireEvent.change(screen.getByPlaceholderText("Password"), {
       target: { value: userPassword },
     });
-
-    // fireEvent.change(screen.getByPlaceholderText("Password Confirmation"), {
-    //   target: { value: userPassword },
-    // });
-
-    // const submitButton = screen.getByText("Sign in");
-    // fireEvent.click(submitButton);
-
-    // const changePage = screen.getByText(
-    //   "Already have an account? Log In here!"
-    // );
-    // fireEvent.click(changePage);
 
     const submitButtonLogIn = screen.getByText("Log in");
     fireEvent.change(screen.getByPlaceholderText("Email"), {
@@ -90,51 +69,6 @@ describe("SignIn", () => {
         screen.getByText(`${random_name}'s Measurements:`)
       ).toBeInTheDocument();
     });
-  });
-  // //  await waitFor( () => {
-  // // const el = screen.getByText("Already have an account? Log In here!");
-
-  // //   fireEvent.click(el);
-
-  // //   const emailFieldLogIn = screen.getByPlaceholderText("Email");
-  // //   const passFieldLogIn = screen.getByPlaceholderText("Password");
-  // //   const submitButtonLogIn = screen.getByText("Log in");
-
-  // //   expect(screen.getByText(`Welcome ${random_name}!`)).toBeInTheDocument();
-  // //   fireEvent.change(emailFieldLogIn, {
-  // //     target: { value: random_email },
-  // //   });
-  // //   fireEvent.change(passFieldLogIn, { target: { value: userPassword } });
-
-  // //   fireEvent.click(submitButtonLogIn);
-  // // });
-  it("Should render username when logged in succesfully ", async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Routes />
-        </MemoryRouter>
-      </Provider>
-    );
-    // const emailField = screen.getByPlaceholderText("Email");
-    // const passField = screen.getByPlaceholderText("Password");
-    // const submitButton = screen.getByText("Log in");
-    // fireEvent.change(emailField, {
-    //   target: { value: random_email },
-    // });
-    // fireEvent.change(passField, { target: { value: userPassword } });
-
-    // fireEvent.click(submitButton);
-
-    //   // await logInUser({
-    //   //   email: random_email,
-    //   //   password: userPassword,
-    //   // });
-
-    await waitFor(() => {
-      // expect().toBeInTheDocument();
-      // expect(screen.getByText(`Welcome ${random_name}!`)).toBeInTheDocument();
-      expect(screen.getByText("Track.it")).toBeInTheDocument();
-    });
+    clearStorage();
   });
 });
