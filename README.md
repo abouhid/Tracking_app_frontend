@@ -55,6 +55,10 @@ To get the back-end running locally you will need to change the URL variable in 
 - Github: [@abouhid](https://github.com/abouhid)
 - LinkedIn: [Alexandre Bouhid](https://www.linkedin.com/in/alexandrebouhid/)
 
+## Acknowledgements
+
+This project was based on the front-end styling of https://www.behance.net/gallery/13271423/Bodytrackit-An-iOs-app-Branding-UX-and-UI from Gregoire Vella
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!

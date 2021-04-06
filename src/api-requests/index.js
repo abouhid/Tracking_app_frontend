@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const URL = "http://tracking-app-alex.herokuapp.com";
-const URL = "http://localhost:3001";
+const URL = "https://tracking-app-alex.herokuapp.com";
 
 export const logInUser = async (data) => {
   return await axios({
@@ -31,7 +30,7 @@ export const signInUser = async (data) => {
 
 export const getMeasurements = async (userToken, measureData) => {
   await axios
-    .get("http://localhost:3001/measurements", {
+    .get(`${URL}/measurements`, {
       headers: {
         Authorization: `Basic ${userToken}`,
       },
@@ -51,7 +50,7 @@ export const addMeasurement = async (
   inputValue
 ) => {
   await axios({
-    url: `http://localhost:3001/measurements/`,
+    url: `${URL}/measurements`,
     data: {
       name: inputValue,
       created_by: userId,
@@ -75,7 +74,7 @@ export const removeMeasurement = async (
   setFetchRequested
 ) => {
   await axios({
-    url: `http://localhost:3001/measurements/${id}`,
+    url: `${URL}/measurements/${id}`,
     method: "DELETE",
     headers: {
       Authorization: `Basic ${userToken}`,
@@ -97,7 +96,7 @@ export const addMeasure = async (
   inputValue
 ) => {
   await axios({
-    url: `http://localhost:3001/measurements/${id}/measures`,
+    url: `${URL}/measurements/${id}/measures`,
     data: { value_of_measure: inputValue, measurement_id: id },
     method: "POST",
     headers: {
@@ -119,7 +118,7 @@ export const updateMeasure = async (
   inputValue
 ) => {
   await axios({
-    url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}`,
+    url: `${URL}/measurements/${data.measurement_id}/measures/${data.id}`,
     data: { value_of_measure: inputValue, measurement_id: data.id },
     method: "PATCH",
     headers: {
@@ -140,8 +139,9 @@ export const deleteMeasure = async (
   setFetchRequested,
   fetchRequested
 ) => {
+  console.log("delete", data);
   await axios({
-    url: `http://localhost:3001/measurements/${data.measurement_id}/measures/${data.id}/`,
+    url: `${URL}/measurements/${data.measurement_id}/measures/${data.id}/`,
     method: "DELETE",
     headers: {
       Authorization: `Basic ${userToken}`,
