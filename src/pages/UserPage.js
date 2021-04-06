@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getMeasurements } from "../api-requests";
-import { Paper } from "@material-ui/core";
+import { Button, Paper } from "@material-ui/core";
+import { Face, Assessment, MenuBook } from "@material-ui/icons";
+import fullLogo from "../images/full_logo.png";
 
 const UserPage = ({
   isLoggedIn,
@@ -30,11 +32,37 @@ const UserPage = ({
       {isLoggedIn ? (
         <Paper
           elevation={3}
-          className="p-3 profile d-flex flex-column justify-content-around"
+          className="p-3 profile d-flex flex-column align-items-center justify-content-around"
         >
-          <h4>Username: {userInfo}</h4>
-          <h4>Number of Measurements added: {totalMeasurments()}</h4>
-          <h4>Total of Measures recorded: {totalMeasures()}</h4>
+          <div className=" p-3 d-flex flex-column align-items-center ">
+            <img className="fulllogo" src={fullLogo} alt="Logo" />
+            <p className="mb-4">
+              <Face />
+              {userInfo}
+            </p>
+
+            <p>
+              <Assessment />
+              Number of Measurements added:
+            </p>
+            <p>{totalMeasurments()}</p>
+            <p>
+              <MenuBook /> Total of Measures recorded:
+            </p>
+            <p>{totalMeasures()}</p>
+          </div>
+          <div>
+            <div className="text-center text-secondary">
+              <Link to="/">
+                <Button>Home</Button>
+              </Link>
+              <Link to="/new">
+                <Button>Add more Tracks!</Button>
+              </Link>
+            </div>
+            <div className="p-2 mb-3 d-flex flex-column  align-items-center"></div>
+            <h5 className="mx-auto">Copyright © 2021 by Alexandre Bouhid </h5>
+          </div>
         </Paper>
       ) : (
         <Redirect to="/" />

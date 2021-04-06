@@ -139,7 +139,6 @@ export const deleteMeasure = async (
   setFetchRequested,
   fetchRequested
 ) => {
-  console.log("delete", data);
   await axios({
     url: `${URL}/measurements/${data.measurement_id}/measures/${data.id}/`,
     method: "DELETE",

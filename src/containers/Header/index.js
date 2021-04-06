@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { userData } from "../../redux/actions";
 import PropTypes from "prop-types";
 import "./index.css";
+import logo from "../../images/logo.png";
 
 import { useHistory } from "react-router";
 import { signOut } from "../../api-requests";
@@ -44,7 +45,7 @@ function Header({ isLoggedIn, userData }) {
               history.push(`/`);
             }}
           >
-            <Home />
+            <img className="logo" src={logo} alt="Logo" />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Track.it

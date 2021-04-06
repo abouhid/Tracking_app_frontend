@@ -8,13 +8,7 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import SubmitForm from "../components/SubmitForm";
 import { Paper } from "@material-ui/core";
 
-const AddPage = ({
-  isLoggedIn,
-  dataInfo,
-  measureData,
-  userToken,
-  userInfo,
-}) => {
+const AddPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const [value, setValue] = useState("Choose Measurement");
   const [id, setId] = useState("");
 
@@ -76,14 +70,12 @@ const AddPage = ({
 const mapStateToProps = (state) => ({
   isLoggedIn: state.userStore.isLoggedIn,
   userToken: state.userStore.userToken,
-  userInfo: state.userStore.userInfo,
   dataInfo: state.measureStore.dataInfo,
 });
 
 AddPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   userToken: PropTypes.string.isRequired,
-  userInfo: PropTypes.string.isRequired,
   dataInfo: PropTypes.array.isRequired,
 };
 
