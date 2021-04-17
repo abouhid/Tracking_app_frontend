@@ -3,9 +3,9 @@ import { USER_DATA } from "../actions";
 const userReducer = (
   state = {
     isLoggedIn: false,
-    userToken: "",
-    userInfo: "",
-    userId: "",
+    userToken: JSON.parse(localStorage.getItem("tokenObj")),
+    userInfo: localStorage.getItem("userInfo"),
+    userId: JSON.parse(localStorage.getItem("userId")),
   },
   action
 ) => {

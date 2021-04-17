@@ -9,14 +9,13 @@ import SubmitForm from "../../components/SubmitForm";
 
 const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
   const [fetchRequested, setFetchRequested] = useState(false);
-
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
   return (
     <>
       <Typography className="text-center py-4">
-        {userInfo}'s Measurements:
+        {localStorage.getItem("userInfo")}'s Measurements:
       </Typography>
 
       <Grid container item xs={12} spacing={3} alignItems="center" m={0}>
@@ -49,9 +48,9 @@ const mapStateToProps = (state) => ({
 });
 
 MeasurementsGrid.propTypes = {
-  userToken: PropTypes.string.isRequired,
+  userToken: PropTypes.shape({ token: PropTypes.string }).isRequired,
   userInfo: PropTypes.string.isRequired,
-  dataInfo: PropTypes.array.isRequired,
+  dataInfo: PropTypes.array,
 };
 
 const mapDispatch = {

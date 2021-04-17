@@ -4,7 +4,7 @@ import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
-import { getMeasurements } from "../api-requests";
+import { checkToken, getMeasurements } from "../api-requests";
 
 const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
 
   return (
     <div className="Page w-100 Page">
-      {isLoggedIn ? (
+      {checkToken() ? (
         <>
           <h3 className="my-4 text-center">All Your Tracks</h3>
 
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 
 TrackPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  userToken: PropTypes.string.isRequired,
+  userToken: PropTypes.shape({ token: PropTypes.string }).isRequired,
   dataInfo: PropTypes.array.isRequired,
 };
 

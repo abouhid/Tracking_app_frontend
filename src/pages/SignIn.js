@@ -1,20 +1,16 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import jwt from "jwt-decode";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { saveToken, signInUser } from "../api-requests";
-import { userData } from "../redux/actions";
 import Form from "react-bootstrap/Form";
 import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const SignIn = ({ userData }) => {
+const SignIn = () => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [signIn, setSignIn] = useState({
     name: "",
     email: "",
@@ -36,13 +32,7 @@ const SignIn = ({ userData }) => {
     e.preventDefault();
     const data = await signInUser(signIn);
     if (data.statusText === "Created") {
-      saveToken(data.data.auth_token);
-      userData({
-        isLoggedIn: true,
-        userToken: data.data.auth_token,
-        userInfo: jwt(data.data.auth_token).name,
-      });
-
+      saveToken(data);
       history.push("/");
     } else {
       setShow(true);
@@ -118,12 +108,4 @@ const SignIn = ({ userData }) => {
   );
 };
 
-const mapDispatch = {
-  userData,
-};
-
-SignIn.propTypes = {
-  userData: PropTypes.func.isRequired,
-};
-
-export default connect(null, mapDispatch)(SignIn);
+export default connect()(SignIn);

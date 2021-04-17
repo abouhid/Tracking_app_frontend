@@ -1,25 +1,20 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { connect } from "react-redux";
-import jwt from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { logInUser, saveToken } from "../api-requests";
-import { userData } from "../redux/actions";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 
-const LogIn = ({ userData }) => {
+const LogIn = () => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [state, setState] = useState({
     email: "",
     password: "",
   });
-
   const handleChange = (e) => {
     const { id, value } = e.target;
     setState((prevState) => ({
@@ -32,16 +27,10 @@ const LogIn = ({ userData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = await logInUser(state);
     if (data.statusText === "OK") {
-      saveToken(data.data.auth_token);
-      userData({
-        isLoggedIn: true,
-        userToken: data.data.auth_token,
-        userInfo: jwt(data.data.auth_token).name,
-        userId: jwt(data.data.auth_token).user_id,
-      });
+      saveToken(data);
+
       history.push("/");
     } else {
       setShow(true);
@@ -96,12 +85,4 @@ const LogIn = ({ userData }) => {
   );
 };
 
-const mapDispatch = {
-  userData,
-};
-
-LogIn.propTypes = {
-  userData: PropTypes.func.isRequired,
-};
-
-export default connect(null, mapDispatch)(LogIn);
+export default connect()(LogIn);

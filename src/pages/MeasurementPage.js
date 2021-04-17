@@ -4,7 +4,11 @@ import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
-import { getMeasurements, removeMeasurement } from "../api-requests";
+import {
+  checkToken,
+  getMeasurements,
+  removeMeasurement,
+} from "../api-requests";
 import SubmitForm from "../components/SubmitForm";
 import { Modal, Button } from "react-bootstrap";
 
@@ -21,10 +25,9 @@ const MeasurementPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   }, [fetchRequested]);
 
   const measurementInfo = dataInfo.find((el) => el.id == id);
-
   return (
     <div className="Page w-100">
-      {isLoggedIn ? (
+      {checkToken() && dataInfo.length ? (
         <>
           <h3 className="my-4 text-center">
             Your{" "}
@@ -96,7 +99,7 @@ const mapStateToProps = (state) => ({
 
 MeasurementPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  userToken: PropTypes.string.isRequired,
+  userToken: PropTypes.shape({ token: PropTypes.string }).isRequired,
   dataInfo: PropTypes.array.isRequired,
 };
 

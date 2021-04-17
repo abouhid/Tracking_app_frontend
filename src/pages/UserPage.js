@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getMeasurements } from "../api-requests";
+import { checkToken, getMeasurements } from "../api-requests";
 import { Button, Paper } from "@material-ui/core";
 import { Face, Assessment, MenuBook } from "@material-ui/icons";
 import fullLogo from "../images/full_logo.png";
@@ -18,7 +18,6 @@ const UserPage = ({
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, []);
-
   const totalMeasurments = () =>
     dataInfo.map((el) => el.measures.map((el) => el.value_of_measure)).length;
 
@@ -29,7 +28,7 @@ const UserPage = ({
 
   return (
     <div className="Page">
-      {isLoggedIn ? (
+      {checkToken() ? (
         <Paper
           elevation={3}
           className="p-3 profile d-flex flex-column align-items-center justify-content-around"
@@ -80,7 +79,7 @@ const mapStateToProps = (state) => ({
 
 UserPage.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  userToken: PropTypes.string.isRequired,
+  userToken: PropTypes.shape({ token: PropTypes.string }).isRequired,
   userInfo: PropTypes.string.isRequired,
   dataInfo: PropTypes.array.isRequired,
 };

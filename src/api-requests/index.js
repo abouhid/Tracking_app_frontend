@@ -1,4 +1,6 @@
 import axios from "axios";
+import { userData } from "../redux/actions";
+import jwt from "jwt-decode";
 
 const URL = "https://tracking-app-alex.herokuapp.com";
 
@@ -32,7 +34,7 @@ export const getMeasurements = async (userToken, measureData) => {
   await axios
     .get(`${URL}/measurements`, {
       headers: {
-        Authorization: `Basic ${userToken}`,
+        Authorization: `Basic ${userToken.token}`,
       },
     })
     .then(function (response) {
@@ -57,7 +59,7 @@ export const addMeasurement = async (
     },
     method: "POST",
     headers: {
-      Authorization: `Basic ${userToken}`,
+      Authorization: `Basic ${userToken.token}`,
     },
   })
     .then(function (response) {
@@ -77,7 +79,7 @@ export const removeMeasurement = async (
     url: `${URL}/measurements/${id}`,
     method: "DELETE",
     headers: {
-      Authorization: `Basic ${userToken}`,
+      Authorization: `Basic ${userToken.token}`,
     },
   })
     .then(function (response) {
@@ -100,7 +102,7 @@ export const addMeasure = async (
     data: { value_of_measure: inputValue, measurement_id: id },
     method: "POST",
     headers: {
-      Authorization: `Basic ${userToken}`,
+      Authorization: `Basic ${userToken.token}`,
     },
   })
     .then(function (response) {
@@ -122,7 +124,7 @@ export const updateMeasure = async (
     data: { value_of_measure: inputValue, measurement_id: data.id },
     method: "PATCH",
     headers: {
-      Authorization: `Basic ${userToken}`,
+      Authorization: `Basic ${userToken.token}`,
     },
   })
     .then(function (response) {
@@ -143,7 +145,7 @@ export const deleteMeasure = async (
     url: `${URL}/measurements/${data.measurement_id}/measures/${data.id}/`,
     method: "DELETE",
     headers: {
-      Authorization: `Basic ${userToken}`,
+      Authorization: `Basic ${userToken.token}`,
     },
   })
     .then(function (response) {
@@ -166,19 +168,32 @@ export const checkToken = () => {
   return true;
 };
 
-export const saveToken = (token) => {
+export const saveToken = (data) => {
   const NOW = Date.now();
 
   const tokenObj = {
-    token,
+    token: data.data.auth_token,
     expiresAt: NOW + 86400000,
   };
+  localStorage.setItem("tokenObj", JSON.stringify(tokenObj));
 
-  return localStorage.setItem("tokenObj", JSON.stringify(tokenObj));
+  userData({
+    isLoggedIn: true,
+    userToken: data.data.auth_token,
+    userInfo: jwt(data.data.auth_token).name,
+    userId: jwt(data.data.auth_token).user_id,
+  });
+
+  localStorage.setItem("userInfo", jwt(data.data.auth_token).name);
+
+  localStorage.setItem(
+    "userId",
+    JSON.stringify(jwt(data.data.auth_token).user_id)
+  );
 };
 
-export const signOut = (history, userData) => {
-  localStorage.clear("tokenObj");
+export const signOut = (history) => {
+  localStorage.clear();
   userData({
     isLoggedIn: false,
     userToken: "",
