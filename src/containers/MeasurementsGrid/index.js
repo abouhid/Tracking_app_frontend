@@ -20,7 +20,7 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
       </Typography>
 
       <Grid container item xs={12} spacing={3} alignItems="center" m={0}>
-        {dataInfo[0] ? (
+        {dataInfo ? (
           <>
             {dataInfo.map((el) => (
               <MeasurementItem key={el.id} el={el} />

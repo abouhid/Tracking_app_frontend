@@ -33,21 +33,6 @@ describe("LogIn", () => {
     const random_email = "test@gmail.com";
     const userPassword = "123123";
 
-    const data = await logInUser({
-      email: random_email,
-      password: userPassword,
-    });
-
-    if (data.statusText === "OK") {
-      saveToken(data.data.auth_token);
-      userData({
-        isLoggedIn: true,
-        userToken: data.data.auth_token,
-        userInfo: jwt(data.data.auth_token).name,
-        userId: jwt(data.data.auth_token).user_id,
-      });
-    }
-
     const submitButtonLogIn = screen.getByText("Log in");
     fireEvent.change(screen.getByPlaceholderText("Email"), {
       target: { value: random_email },

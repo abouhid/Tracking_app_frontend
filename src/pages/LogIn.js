@@ -6,10 +6,15 @@ import { useHistory } from "react-router-dom";
 import { logInUser, saveToken } from "../api-requests";
 import { userData } from "../redux/actions";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 
 const LogIn = ({ userData }) => {
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -38,11 +43,26 @@ const LogIn = ({ userData }) => {
         userId: jwt(data.data.auth_token).user_id,
       });
       history.push("/");
+    } else {
+      setShow(true);
+      setError(data.data.message);
     }
   };
 
   return (
     <div className="Page d-flex">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>{error}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Form className="mb-5 align-self-center" onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Email address</Form.Label>

@@ -6,10 +6,15 @@ import { connect } from "react-redux";
 import { saveToken, signInUser } from "../api-requests";
 import { userData } from "../redux/actions";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const SignIn = ({ userData }) => {
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [signIn, setSignIn] = useState({
     name: "",
     email: "",
@@ -39,11 +44,26 @@ const SignIn = ({ userData }) => {
       });
 
       history.push("/");
+    } else {
+      setShow(true);
+      setError(data.data.message);
     }
   };
 
   return (
     <div className="Page d-flex">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>{error}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Form className="mb-5 align-self-center" onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Username</Form.Label>

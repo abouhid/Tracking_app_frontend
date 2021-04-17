@@ -12,7 +12,7 @@ export const logInUser = async (data) => {
     },
   })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => err.response);
 };
 
 export const signInUser = async (data) => {
@@ -25,7 +25,7 @@ export const signInUser = async (data) => {
     },
   })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => err.response);
 };
 
 export const getMeasurements = async (userToken, measureData) => {
