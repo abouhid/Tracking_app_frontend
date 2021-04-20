@@ -37,17 +37,17 @@ const AddPage = ({ dataInfo, measureData, userToken }) => {
   }, [fetchRequested]);
 
   const dropdownItems = () => {
-    return dataInfo
-      ? dataInfo.map((el) => {
-          <Dropdown.Item key={el.id} eventKey={el.name}>
-            {el.name}
-          </Dropdown.Item>;
-        })
-      : "";
+    return dataInfo.map((el) => {
+      return (
+        <Dropdown.Item key={el.id} eventKey={el.name}>
+          {el.name}
+        </Dropdown.Item>
+      );
+    });
   };
   return (
     <div className="Page">
-      {checkToken() ? (
+      {checkToken() && dataInfo ? (
         <Paper className="Page add d-flex flex-column align-items-center justify-content-around">
           <div className="d-flex justify-content-center mt-3 font-weight-bold ">
             {finalValue}

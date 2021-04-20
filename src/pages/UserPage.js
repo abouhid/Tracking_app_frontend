@@ -38,7 +38,7 @@ const UserPage = ({
 
   return (
     <div className="Page">
-      {checkToken() ? (
+      {checkToken() && dataInfo ? (
         <Paper
           elevation={3}
           className="p-3 profile d-flex flex-column align-items-center justify-content-around"
