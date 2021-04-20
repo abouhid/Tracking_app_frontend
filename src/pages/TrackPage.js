@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
-import { measureData } from "../redux/actions";
+import { measureData, userData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
-import { checkToken } from "../api-requests";
+import { checkToken, getMeasurements, changeToken } from "../api-requests";
+import store from "../redux/store";
 
 const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
-
+  useEffect(() => {
+    getMeasurements(measureData);
+    store.dispatch(
+      userData({
+        isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+        userToken: JSON.parse(localStorage.getItem("tokenObj")),
+        userInfo: localStorage.getItem("userInfo"),
+        userId: JSON.parse(localStorage.getItem("userId")),
+      })
+    );
+    changeToken(store.getState().userStore.userToken.token);
+  }, [fetchRequested]);
   return (
     <div className="Page w-100 Page">
       {checkToken() ? (
