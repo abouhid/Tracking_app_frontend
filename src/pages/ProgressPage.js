@@ -28,12 +28,4 @@ const ProgressPage = () => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.userStore.isLoggedIn,
-});
-
-ProgressPage.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-};
-
-export default connect(mapStateToProps)(ProgressPage);
+export default connect()(ProgressPage);

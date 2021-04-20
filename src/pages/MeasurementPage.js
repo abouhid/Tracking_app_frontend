@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory, Redirect } from "react-router-dom";
-import { measureData } from "../redux/actions";
+import { measureData, userData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
 import {
+  changeToken,
   checkToken,
   getMeasurements,
   removeMeasurement,
 } from "../api-requests";
 import SubmitForm from "../components/SubmitForm";
 import { Modal, Button } from "react-bootstrap";
+import store from "../redux/store";
 
 const MeasurementPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const [show, setShow] = useState(false);
@@ -21,13 +23,22 @@ const MeasurementPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const [fetchRequested, setFetchRequested] = useState(false);
   const history = useHistory();
   useEffect(() => {
-    getMeasurements(userToken, measureData);
+    store.dispatch(
+      userData({
+        isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+        userToken: JSON.parse(localStorage.getItem("tokenObj")),
+        userInfo: localStorage.getItem("userInfo"),
+        userId: JSON.parse(localStorage.getItem("userId")),
+      })
+    );
+    changeToken(store.getState().userStore.userToken.token);
+    getMeasurements(measureData);
   }, [fetchRequested]);
 
-  const measurementInfo = dataInfo.find((el) => el.id == id);
+  const measurementInfo = dataInfo ? dataInfo.find((el) => el.id == id) : [];
   return (
     <div className="Page w-100">
-      {checkToken() && dataInfo.length ? (
+      {checkToken() && dataInfo ? (
         <>
           <h3 className="my-4 text-center">
             Your{" "}

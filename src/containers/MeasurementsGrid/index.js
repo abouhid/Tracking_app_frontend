@@ -3,14 +3,24 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasurementItem from "../MeasurementItem";
 import { Grid, Typography } from "@material-ui/core";
-import { measureData } from "../../redux/actions";
-import { getMeasurements } from "../../api-requests";
+import { measureData, userData } from "../../redux/actions";
+import { changeToken, getMeasurements } from "../../api-requests";
 import SubmitForm from "../../components/SubmitForm";
+import store from "../../redux/store";
 
-const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
+const MeasurementsGrid = ({ userInfo, measureData, dataInfo }) => {
   const [fetchRequested, setFetchRequested] = useState(false);
   useEffect(() => {
-    getMeasurements(userToken, measureData);
+    store.dispatch(
+      userData({
+        isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+        userToken: JSON.parse(localStorage.getItem("tokenObj")),
+        userInfo: localStorage.getItem("userInfo"),
+        userId: JSON.parse(localStorage.getItem("userId")),
+      })
+    );
+    changeToken(store.getState().userStore.userToken.token);
+    getMeasurements(measureData);
   }, [fetchRequested]);
 
   return (
@@ -31,7 +41,6 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
         )}
 
         <SubmitForm
-          userToken={userToken}
           value={dataInfo}
           setFetchRequested={setFetchRequested}
           fetchRequested={fetchRequested}
@@ -43,14 +52,12 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
 };
 
 const mapStateToProps = (state) => ({
-  userToken: state.userStore.userToken,
   userInfo: state.userStore.userInfo,
   dataInfo: state.measureStore.dataInfo,
 });
 
 MeasurementsGrid.propTypes = {
-  userToken: PropTypes.shape({ token: PropTypes.string }).isRequired,
-  userInfo: PropTypes.string.isRequired,
+  userInfo: PropTypes.string,
   dataInfo: PropTypes.array,
 };
 

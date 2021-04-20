@@ -5,6 +5,15 @@ import store from "../redux/store";
 
 const URL = "https://tracking-app-alex.herokuapp.com";
 
+export const changeToken = () => {
+  const token = store.getState().userStore.userToken.token;
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = token;
+  } else {
+    axios.defaults.headers.common["Authorization"] = null;
+  }
+};
+
 export const logInUser = async (data) => {
   return await axios({
     url: `${URL}/auth/login`,
@@ -31,22 +40,17 @@ export const signInUser = async (data) => {
     .catch((err) => err.response);
 };
 
-export const getMeasurements = async (userToken, measureData) => {
+export const getMeasurements = async (measureData) => {
   await axios
-    .get(`${URL}/measurements`, {
-      headers: {
-        Authorization: `Basic ${userToken.token}`,
-      },
-    })
+    .get(`${URL}/measurements`)
     .then(function (response) {
       store.dispatch(measureData({ dataInfo: response.data }));
     })
     .catch((error) => {
-      return error;
+      console.log(error);
     });
 };
 export const addMeasurement = async (
-  userToken,
   userId,
   fetchRequested,
   setFetchRequested,
@@ -59,9 +63,6 @@ export const addMeasurement = async (
       created_by: userId,
     },
     method: "POST",
-    headers: {
-      Authorization: `Basic ${userToken.token}`,
-    },
   })
     .then(function (response) {
       setFetchRequested(!fetchRequested);
@@ -72,16 +73,13 @@ export const addMeasurement = async (
 };
 export const removeMeasurement = async (
   id,
-  userToken,
+
   fetchRequested,
   setFetchRequested
 ) => {
   await axios({
     url: `${URL}/measurements/${id}`,
     method: "DELETE",
-    headers: {
-      Authorization: `Basic ${userToken.token}`,
-    },
   })
     .then(function (response) {
       setFetchRequested(!fetchRequested);
@@ -93,7 +91,7 @@ export const removeMeasurement = async (
 
 export const addMeasure = async (
   id,
-  userToken,
+
   setFetchRequested,
   fetchRequested,
   inputValue
@@ -102,9 +100,6 @@ export const addMeasure = async (
     url: `${URL}/measurements/${id}/measures`,
     data: { value_of_measure: inputValue, measurement_id: id },
     method: "POST",
-    headers: {
-      Authorization: `Basic ${userToken.token}`,
-    },
   })
     .then(function (response) {
       setFetchRequested(!fetchRequested);
@@ -115,7 +110,7 @@ export const addMeasure = async (
 };
 export const updateMeasure = async (
   data,
-  userToken,
+
   setFetchRequested,
   fetchRequested,
   inputValue
@@ -124,9 +119,6 @@ export const updateMeasure = async (
     url: `${URL}/measurements/${data.measurement_id}/measures/${data.id}`,
     data: { value_of_measure: inputValue, measurement_id: data.id },
     method: "PATCH",
-    headers: {
-      Authorization: `Basic ${userToken.token}`,
-    },
   })
     .then(function (response) {
       setFetchRequested(!fetchRequested);
@@ -138,16 +130,12 @@ export const updateMeasure = async (
 
 export const deleteMeasure = async (
   data,
-  userToken,
   setFetchRequested,
   fetchRequested
 ) => {
   await axios({
     url: `${URL}/measurements/${data.measurement_id}/measures/${data.id}/`,
     method: "DELETE",
-    headers: {
-      Authorization: `Basic ${userToken.token}`,
-    },
   })
     .then(function (response) {
       setFetchRequested(!fetchRequested);
@@ -186,6 +174,8 @@ export const saveToken = (data) => {
 
 export const signOut = (history) => {
   localStorage.clear();
+  axios.defaults.headers.common["Authorization"] = null;
+
   store.dispatch(
     userData({
       isLoggedIn: false,

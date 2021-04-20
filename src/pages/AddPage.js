@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { measureData } from "../redux/actions";
+import { measureData, userData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { checkToken, getMeasurements } from "../api-requests";
+import { checkToken, getMeasurements, changeToken } from "../api-requests";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import SubmitForm from "../components/SubmitForm";
 import { Paper } from "@material-ui/core";
+import store from "../redux/store";
 
 const AddPage = ({ dataInfo, measureData, userToken }) => {
   const [value, setValue] = useState("Choose Measurement");
@@ -23,17 +24,26 @@ const AddPage = ({ dataInfo, measureData, userToken }) => {
   result.splice(4, 2);
   const finalValue = result.join(" ");
   useEffect(() => {
-    getMeasurements(userToken, measureData);
-  }, []);
+    getMeasurements(measureData);
+    store.dispatch(
+      userData({
+        isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+        userToken: JSON.parse(localStorage.getItem("tokenObj")),
+        userInfo: localStorage.getItem("userInfo"),
+        userId: JSON.parse(localStorage.getItem("userId")),
+      })
+    );
+    changeToken(store.getState().userStore.userToken.token);
+  }, [fetchRequested]);
 
   const dropdownItems = () => {
-    return dataInfo.map((el) => {
-      return (
-        <Dropdown.Item key={el.id} eventKey={el.name}>
-          {el.name}
-        </Dropdown.Item>
-      );
-    });
+    return dataInfo
+      ? dataInfo.map((el) => {
+          <Dropdown.Item key={el.id} eventKey={el.name}>
+            {el.name}
+          </Dropdown.Item>;
+        })
+      : "";
   };
   return (
     <div className="Page">

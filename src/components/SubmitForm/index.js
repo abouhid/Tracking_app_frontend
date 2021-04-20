@@ -6,7 +6,6 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { Icon } from "@material-ui/core";
 
 const SubmitForm = ({
-  userToken,
   value,
   setFetchRequested,
   fetchRequested,
@@ -30,28 +29,10 @@ const SubmitForm = ({
     evt.preventDefault();
     let inputValue = formInput.measure;
     editForm
-      ? updateMeasure(
-          value,
-          userToken,
-          setFetchRequested,
-          fetchRequested,
-          inputValue
-        )
+      ? updateMeasure(value, setFetchRequested, fetchRequested, inputValue)
       : measurementForm
-      ? addMeasurement(
-          userToken,
-          userId,
-          fetchRequested,
-          setFetchRequested,
-          inputValue
-        )
-      : addMeasure(
-          value,
-          userToken,
-          setFetchRequested,
-          fetchRequested,
-          inputValue
-        );
+      ? addMeasurement(userId, fetchRequested, setFetchRequested, inputValue)
+      : addMeasure(value, setFetchRequested, fetchRequested, inputValue);
 
     setChecked(!checked);
     setFormInput({ measure: "" });

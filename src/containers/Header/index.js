@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header({ isLoggedIn, userData }) {
+function Header({ userData }) {
   const history = useHistory();
   const classes = useStyles();
 
@@ -71,16 +71,8 @@ function Header({ isLoggedIn, userData }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.userStore.isLoggedIn,
-});
-
-Header.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-};
-
 const mapDispatch = {
   userData,
 };
 
-export default connect(mapStateToProps, mapDispatch)(Header);
+export default connect(null, mapDispatch)(Header);

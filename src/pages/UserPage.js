@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { measureData } from "../redux/actions";
+import { measureData, userData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { checkToken, getMeasurements } from "../api-requests";
+import { checkToken, getMeasurements, changeToken } from "../api-requests";
 import { Button, Paper } from "@material-ui/core";
 import { Face, Assessment, MenuBook } from "@material-ui/icons";
 import fullLogo from "../images/full_logo.png";
+import store from "../redux/store";
 
 const UserPage = ({
   isLoggedIn,
@@ -16,7 +17,16 @@ const UserPage = ({
   userInfo,
 }) => {
   useEffect(() => {
-    getMeasurements(userToken, measureData);
+    store.dispatch(
+      userData({
+        isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+        userToken: JSON.parse(localStorage.getItem("tokenObj")),
+        userInfo: localStorage.getItem("userInfo"),
+        userId: JSON.parse(localStorage.getItem("userId")),
+      })
+    );
+    changeToken(store.getState().userStore.userToken.token);
+    getMeasurements(measureData);
   }, []);
   const totalMeasurments = () =>
     dataInfo.map((el) => el.measures.map((el) => el.value_of_measure)).length;

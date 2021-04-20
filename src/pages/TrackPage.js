@@ -4,14 +4,11 @@ import { measureData } from "../redux/actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MeasureItem from "../components/MeasureItem";
-import { checkToken, getMeasurements } from "../api-requests";
+import { checkToken } from "../api-requests";
 
 const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   const { id } = useParams();
   const [fetchRequested, setFetchRequested] = useState(false);
-  useEffect(() => {
-    getMeasurements(userToken, measureData);
-  }, [fetchRequested]);
 
   return (
     <div className="Page w-100 Page">

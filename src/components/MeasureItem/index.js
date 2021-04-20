@@ -6,13 +6,7 @@ import SubmitForm from "../SubmitForm";
 import "./index.css";
 import { TrendingDown, TrendingUp } from "@material-ui/icons";
 
-const MeasureItem = ({
-  userToken,
-  setFetchRequested,
-  fetchRequested,
-  item,
-  userId,
-}) => {
+const MeasureItem = ({ setFetchRequested, fetchRequested, item, userId }) => {
   const creationDate = (date) => {
     const createdAt = new Date(date)
       .toUTCString()
@@ -25,15 +19,12 @@ const MeasureItem = ({
 
   const deleteIcon = (value) => (
     <DeleteIcon
-      onClick={() =>
-        deleteMeasure(value, userToken, setFetchRequested, fetchRequested)
-      }
+      onClick={() => deleteMeasure(value, setFetchRequested, fetchRequested)}
     />
   );
 
   const editIcon = (value) => (
     <SubmitForm
-      userToken={userToken}
       value={value}
       setFetchRequested={setFetchRequested}
       fetchRequested={fetchRequested}
