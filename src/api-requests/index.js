@@ -1,5 +1,5 @@
 import axios from "axios";
-import { userData } from "../redux/actions";
+import { measureData, userData } from "../redux/actions";
 import jwt from "jwt-decode";
 import store from "../redux/store";
 
@@ -174,8 +174,8 @@ export const saveToken = (data) => {
 
 export const signOut = (history) => {
   localStorage.clear();
-  axios.defaults.headers.common["Authorization"] = null;
-
+  // axios.defaults.headers.common["Authorization"] = null;
+  delete axios.defaults.headers.common["Authorization"];
   store.dispatch(
     userData({
       isLoggedIn: false,
@@ -184,5 +184,6 @@ export const signOut = (history) => {
       userId: "",
     })
   );
+  store.dispatch(measureData({}));
   history.push("/");
 };
