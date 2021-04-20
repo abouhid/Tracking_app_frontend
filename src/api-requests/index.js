@@ -1,6 +1,7 @@
 import axios from "axios";
 import { userData } from "../redux/actions";
 import jwt from "jwt-decode";
+import store from "../redux/store";
 
 const URL = "https://tracking-app-alex.herokuapp.com";
 
@@ -38,7 +39,7 @@ export const getMeasurements = async (userToken, measureData) => {
       },
     })
     .then(function (response) {
-      measureData({ dataInfo: response.data });
+      store.dispatch(measureData({ dataInfo: response.data }));
     })
     .catch((error) => {
       return error;
@@ -170,22 +171,13 @@ export const checkToken = () => {
 
 export const saveToken = (data) => {
   const NOW = Date.now();
-
   const tokenObj = {
     token: data.data.auth_token,
     expiresAt: NOW + 86400000,
   };
+  localStorage.setItem("isLoggedIn", true);
   localStorage.setItem("tokenObj", JSON.stringify(tokenObj));
-
-  userData({
-    isLoggedIn: true,
-    userToken: data.data.auth_token,
-    userInfo: jwt(data.data.auth_token).name,
-    userId: jwt(data.data.auth_token).user_id,
-  });
-
   localStorage.setItem("userInfo", jwt(data.data.auth_token).name);
-
   localStorage.setItem(
     "userId",
     JSON.stringify(jwt(data.data.auth_token).user_id)
@@ -194,11 +186,13 @@ export const saveToken = (data) => {
 
 export const signOut = (history) => {
   localStorage.clear();
-  userData({
-    isLoggedIn: false,
-    userToken: "",
-    userInfo: "",
-    userId: "",
-  });
+  store.dispatch(
+    userData({
+      isLoggedIn: false,
+      userToken: "",
+      userInfo: "",
+      userId: "",
+    })
+  );
   history.push("/");
 };

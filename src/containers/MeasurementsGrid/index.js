@@ -12,10 +12,11 @@ const MeasurementsGrid = ({ userInfo, userToken, measureData, dataInfo }) => {
   useEffect(() => {
     getMeasurements(userToken, measureData);
   }, [fetchRequested]);
+
   return (
     <>
       <Typography className="text-center py-4">
-        {localStorage.getItem("userInfo")}'s Measurements:
+        {userInfo}'s Measurements:
       </Typography>
 
       <Grid container item xs={12} spacing={3} alignItems="center" m={0}>

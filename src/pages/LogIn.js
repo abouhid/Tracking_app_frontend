@@ -5,6 +5,8 @@ import { logInUser, saveToken } from "../api-requests";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
+import { userData } from "../redux/actions";
+import store from "../redux/store";
 
 const LogIn = () => {
   const [show, setShow] = useState(false);
@@ -30,7 +32,14 @@ const LogIn = () => {
     const data = await logInUser(state);
     if (data.statusText === "OK") {
       saveToken(data);
-
+      store.dispatch(
+        userData({
+          isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+          userToken: JSON.parse(localStorage.getItem("tokenObj")),
+          userInfo: localStorage.getItem("userInfo"),
+          userId: JSON.parse(localStorage.getItem("userId")),
+        })
+      );
       history.push("/");
     } else {
       setShow(true);
