@@ -24,7 +24,7 @@ const TrackPage = ({ isLoggedIn, dataInfo, measureData, userToken }) => {
   }, [fetchRequested]);
   return (
     <div className="Page w-100 Page">
-      {checkToken() ? (
+      {checkToken() && dataInfo ? (
         <>
           <h3 className="my-4 text-center">All Your Tracks</h3>
 
