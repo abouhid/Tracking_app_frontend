@@ -3,7 +3,7 @@
 
 # Track.it
 
-This is the Final Capstone Project for the Microverse Program, with the following requirements:
+This is the Final Capstone Project for the Microverse Program. It works alongside the [backend repo](https://github.com/abouhid/Tracking_app_backend) andcontains the following requirements:
 
 - The project is a mobile web app
 - The database has 2 tables (Measures and Measurements)
